@@ -25,6 +25,7 @@ public class PlayerEventHandler implements Listener {
 	// reference to plugin main class
 	private final PluginMain plugin;
 
+	// set of player uuids that will be kicked on respawn
 	private final Set<UUID> kickSet = new HashSet<>();
 
 
