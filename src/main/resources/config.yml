@@ -1,0 +1,26 @@
+# Configuration file for ${project.name} v${project.version}
+
+# enabled worlds list
+# if this list is empty, all worlds will be added to the enabled worlds list
+# otherwise, only listed worlds will be added to the enabled worlds list
+# Note: explicitly set if empty list for testing
+enabled-worlds: []
+#  - enabled_world1
+#  - enabled_world2
+
+# disabled worlds list
+# these worlds will be removed from the enabled worlds list created by the previous setting
+# Note: explicitly set if empty list for testing
+disabled-worlds: []
+#  - disabled_world1
+#  - disabled_world2
+
+
+# ban time (in minutes)
+ban-time: 1440
+
+# Message to display on kick
+kick-message: "You've been temp banned!"
+
+# Message to display on join, before ban has expired
+ban-message: "You're temp banned!"
