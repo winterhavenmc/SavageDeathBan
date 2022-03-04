@@ -41,7 +41,7 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 		this.plugin = Objects.requireNonNull(plugin);
 		this.name = "reload";
 		this.usageString = "/deathban reload";
-		this.description = "Reload plugin settings";
+		this.description = "Reload plugin configuration";
 		this.permission = "deathban.reload";
 	}
 
@@ -62,7 +62,7 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 		plugin.worldManager.reload();
 
 		// send reload success message
-		sender.sendMessage("Plugin reloaded!");
+		sender.sendMessage("DeathBan configuration reloaded!");
 
 		// return true to suppress bukkit usage message
 		return true;

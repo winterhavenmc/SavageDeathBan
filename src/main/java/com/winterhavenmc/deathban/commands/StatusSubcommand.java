@@ -42,7 +42,7 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 		this.plugin = Objects.requireNonNull(plugin);
 		this.name = "status";
 		this.usageString = "/deathban status";
-		this.description = "Display plugin configuraiton settings";
+		this.description = "Display plugin configuration settings";
 		this.permission = "deathban.status";
 	}
 
@@ -69,7 +69,7 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 		sender.sendMessage(ChatColor.GREEN + "Ban time: "
 				+ ChatColor.RESET + plugin.getConfig().getLong("ban-time"));
 
-		sender.sendMessage(ChatColor.GREEN + "Enabled Words: "
+		sender.sendMessage(ChatColor.GREEN + "Enabled Worlds: "
 				+ ChatColor.RESET + plugin.worldManager.getEnabledWorldNames().toString());
 
 		// always return true to suppress bukkit usage message
