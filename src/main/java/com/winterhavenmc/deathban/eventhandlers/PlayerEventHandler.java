@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 
 public class PlayerEventHandler implements Listener {
@@ -83,7 +84,7 @@ public class PlayerEventHandler implements Listener {
 				public void run() {
 					event.getPlayer().kickPlayer(plugin.getConfig().getString("kick-message"));
 				}
-			}.runTaskLater(plugin, plugin.getConfig().getLong("kick-delay"));
+			}.runTaskLater(plugin, plugin.getConfig().getLong("kick-delay") * 20L);
 		}
 	}
 
