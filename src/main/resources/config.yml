@@ -19,6 +19,9 @@ disabled-worlds: []
 # ban time (in minutes)
 ban-time: 1440
 
+# kick delay (in seconds)
+kick-delay: 1
+
 # Message to display on kick
 kick-message: "You've been temp banned!"
 

@@ -83,9 +83,8 @@ public class PlayerEventHandler implements Listener {
 				public void run() {
 					event.getPlayer().kickPlayer(plugin.getConfig().getString("kick-message"));
 				}
-			}.runTaskLater(plugin, 20L);
+			}.runTaskLater(plugin, plugin.getConfig().getLong("kick-delay"));
 		}
-
 	}
 
 }
