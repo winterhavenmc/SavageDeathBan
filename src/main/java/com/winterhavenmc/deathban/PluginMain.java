@@ -2,6 +2,7 @@ package com.winterhavenmc.deathban;
 
 import com.winterhavenmc.deathban.commands.CommandManager;
 import com.winterhavenmc.deathban.eventhandlers.PlayerEventHandler;
+import com.winterhavenmc.deathban.util.MetricsHandler;
 import com.winterhavenmc.util.worldmanager.WorldManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,6 +26,9 @@ public final class PluginMain extends JavaPlugin {
 
 		// instantiate player event handler
 		new PlayerEventHandler(this);
+
+		// instantiate metrics handler
+		new MetricsHandler(this);
 
 	}
 
