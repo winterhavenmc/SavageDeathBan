@@ -86,6 +86,7 @@ public class PlayerEventHandler implements Listener {
 
 	/**
 	 * Event handler for PlayerRespawnEvent
+	 *
 	 * @param event the event handled by this method
 	 */
 	@EventHandler
