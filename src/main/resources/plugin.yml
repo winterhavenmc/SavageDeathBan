@@ -20,6 +20,10 @@ permissions:
     description: Allow use of the reload subcommand.
     default: op
 
+  deathban.help:
+    description: Allow use of the help subcommand.
+    default: op
+
   deathban.status:
     description: Allow use of the status subcommand.
     default: op

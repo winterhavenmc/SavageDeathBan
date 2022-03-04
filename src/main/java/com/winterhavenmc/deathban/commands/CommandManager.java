@@ -134,7 +134,7 @@ public final class CommandManager implements TabExecutor {
 		List<String> returnList = new ArrayList<>();
 
 		for (String subcommand : subcommandRegistry.getKeys()) {
-			if (sender.hasPermission("graveyard." + subcommand)
+			if (sender.hasPermission("deathban." + subcommand)
 					&& subcommand.startsWith(matchString.toLowerCase())) {
 				returnList.add(subcommand);
 			}

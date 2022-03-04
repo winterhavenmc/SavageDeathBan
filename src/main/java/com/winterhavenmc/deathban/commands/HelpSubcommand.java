@@ -44,9 +44,9 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 		this.plugin = Objects.requireNonNull(plugin);
 		this.subcommandRegistry = Objects.requireNonNull(subcommandRegistry);
 		this.name = "help";
-		this.usageString = "/graveyard help [command]";
+		this.usageString = "/deathban help [command]";
 		this.description = "Display plugin help";
-		this.permission = "graveyard.help";
+		this.permission = "deathban.help";
 	}
 
 
@@ -59,7 +59,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 		if (args.length == 2) {
 			if (args[0].equalsIgnoreCase("help")) {
 				for (String subcommand : subcommandRegistry.getKeys()) {
-					if (sender.hasPermission("graveyard." + subcommand)
+					if (sender.hasPermission("deathban." + subcommand)
 							&& subcommand.startsWith(args[1].toLowerCase())
 							&& !subcommand.equalsIgnoreCase("help")) {
 						returnList.add(subcommand);

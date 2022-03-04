@@ -40,9 +40,9 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 	ReloadSubcommand(final PluginMain plugin) {
 		this.plugin = Objects.requireNonNull(plugin);
 		this.name = "reload";
-		this.usageString = "/graveyard reload";
+		this.usageString = "/deathban reload";
 		this.description = "Reload plugin settings";
-		this.permission = "graveyard.reload";
+		this.permission = "deathban.reload";
 	}
 
 

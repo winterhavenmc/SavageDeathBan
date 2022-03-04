@@ -41,9 +41,9 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 	StatusSubcommand(final PluginMain plugin) {
 		this.plugin = Objects.requireNonNull(plugin);
 		this.name = "status";
-		this.usageString = "/graveyard status";
+		this.usageString = "/deathban status";
 		this.description = "Display plugin configuraiton settings";
-		this.permission = "graveyard.status";
+		this.permission = "deathban.status";
 	}
 
 
