@@ -17,6 +17,9 @@ import java.util.UUID;
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 
+/**
+ * Class that implements event handlers for player related events
+ */
 public class PlayerEventHandler implements Listener {
 
 	// reference to plugin main class
@@ -25,6 +28,11 @@ public class PlayerEventHandler implements Listener {
 	private final Set<UUID> kickSet = new HashSet<>();
 
 
+	/**
+	 * Class constructor
+	 *
+	 * @param plugin reference to plugin main class
+	 */
 	public PlayerEventHandler(final PluginMain plugin) {
 
 		// set reference to plugin main class
@@ -35,6 +43,11 @@ public class PlayerEventHandler implements Listener {
 	}
 
 
+	/**
+	 * Event handler for PlayerDeathEvent
+	 *
+	 * @param event the event handled by this method
+	 */
 	@EventHandler
 	public void onPlayerDeath(final PlayerDeathEvent event) {
 
@@ -71,14 +84,24 @@ public class PlayerEventHandler implements Listener {
 	}
 
 
+	/**
+	 * Event handler for PlayerRespawnEvent
+	 * @param event the event handled by this method
+	 */
 	@EventHandler
 	public void onPlayerRespawn(final PlayerRespawnEvent event) {
 
+		// if player is in kick set, perform action
 		if (kickSet.contains(event.getPlayer().getUniqueId())) {
+
+			// remove player from kick set
 			kickSet.remove(event.getPlayer().getUniqueId());
+
+			// run task to kick player after delay
 			new BukkitRunnable() {
 				@Override
 				public void run() {
+					// kick the player with configured message
 					event.getPlayer().kickPlayer(plugin.getConfig().getString("kick-message"));
 				}
 			}.runTaskLater(plugin, plugin.getConfig().getLong("kick-delay") * 20L);

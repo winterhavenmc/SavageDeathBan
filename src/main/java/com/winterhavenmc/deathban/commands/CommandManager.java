@@ -27,7 +27,7 @@ import java.util.*;
 
 
 /**
- * Implements command executor for SavageGraveyards commands.
+ * Implements command executor for SavageDeathBan commands.
  */
 public final class CommandManager implements TabExecutor {
 
@@ -62,7 +62,7 @@ public final class CommandManager implements TabExecutor {
 
 
 	/**
-	 * Tab completer for SavageGraveyards commands
+	 * Tab completer for SavageDeathBan commands
 	 */
 	@Override
 	public List<String> onTabComplete(final @Nonnull CommandSender sender, final @Nonnull Command command,
@@ -89,7 +89,7 @@ public final class CommandManager implements TabExecutor {
 
 
 	/**
-	 * Command Executor for SavageGraveyards
+	 * Command Executor for SavageDeathBan
 	 */
 	@Override
 	public boolean onCommand(final @Nonnull CommandSender sender, final @Nonnull Command command,
