@@ -69,10 +69,8 @@ public class PlayerEventHandler implements Listener {
 
 		// put player in kick set
 		kickSet.add(event.getEntity().getUniqueId());
-
-
-
 	}
+
 
 	@EventHandler
 	public void onPlayerRespawn(final PlayerRespawnEvent event) {
