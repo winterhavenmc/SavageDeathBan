@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 
 public class PlayerEventHandler implements Listener {
