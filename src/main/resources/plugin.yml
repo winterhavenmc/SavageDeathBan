@@ -7,25 +7,25 @@ api-version: 1.16
 
 commands:
   deathban:
-    description: This is the DeathBan base command.
+    description: "This is the DeathBan base command."
     aliases: sdb
-    usage: /deathban [command]
+    usage: "/deathban [command]"
 
 permissions:
   deathban.exempt:
-    description: Allow player exemption from death ban.
+    description: "Allow player exemption from death ban."
     default: op
 
   deathban.help:
-    description: Allow use of the help subcommand.
+    description: "Allow use of the help subcommand."
     default: op
 
   deathban.reload:
-    description: Allow use of the reload subcommand.
+    description: "Allow use of the reload subcommand."
     default: op
 
   deathban.status:
-    description: Allow use of the status subcommand.
+    description: "Allow use of the status subcommand."
     default: op
 
   deathban.admin:
