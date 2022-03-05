@@ -19,7 +19,7 @@ disabled-worlds: []
 # ban player ip
 ban-ip: false
 
-# ban time (in minutes)
+# ban time (in minutes), set to negative for permanent ban
 ban-time: 1440
 
 # kick delay (in seconds)
