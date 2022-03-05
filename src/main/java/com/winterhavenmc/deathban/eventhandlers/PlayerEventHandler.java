@@ -12,6 +12,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.net.InetSocketAddress;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -112,14 +113,11 @@ public class PlayerEventHandler implements Listener {
 	 */
 	private void banPlayer(final Player player) {
 
-		// get expiration date
-		Date expireDate = new Date(System.currentTimeMillis() + MINUTES.toMillis(plugin.getConfig().getLong("ban-time")));
-
 		// get ban list
 		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
 
 		// add player to ban list
-		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), expireDate, BAN_SOURCE);
+		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (banEntry != null) {
@@ -148,14 +146,11 @@ public class PlayerEventHandler implements Listener {
 			return;
 		}
 
-		// get expiration date
-		Date expireDate = new Date(System.currentTimeMillis() + MINUTES.toMillis(plugin.getConfig().getLong("ban-time")));
-
 		// get ip ban list
 		BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
 
 		// add player ip to ban list
-		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), expireDate, BAN_SOURCE);
+		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (ipBanEntry != null) {
@@ -166,6 +161,23 @@ public class PlayerEventHandler implements Listener {
 				plugin.getLogger().info("IP Address " + playerAddress.getHostString() + " for player " + player.getName() + " was banned on death.");
 			}
 		}
+	}
+
+
+	/**
+	 * Get expire date from configured ban time added to current time
+	 *
+	 * @return Date object representing expire time, or null if configured ban time is negative
+	 */
+	private Date getExpireDate() {
+
+		// if configured ban time is negative, return null for permanent ban
+		if (plugin.getConfig().getLong("ban-time") < 0) {
+			return null;
+		}
+
+		// return expire time date object
+		return new Date(System.currentTimeMillis() + MINUTES.toMillis(plugin.getConfig().getLong("ban-time")));
 	}
 
 }
