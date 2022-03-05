@@ -1,0 +1,87 @@
+# Message configuration file for ${project.name} v${project.version}
+
+# Time strings
+TIME_STRINGS:
+  DAY: 'day'
+  DAY_PLURAL: 'days'
+  HOUR: 'hour'
+  HOUR_PLURAL: 'hours'
+  MINUTE: 'minute'
+  MINUTE_PLURAL: 'minutes'
+  SECOND: 'second'
+  SECOND_PLURAL: 'seconds'
+  UNLIMITED: 'unlimited time'
+  LESS_THAN_ONE: 'less than one'
+
+
+# Variable substitutions:
+# %PLAYER%              Message recipient's name
+# %PLAYER_IP%           Player ip address
+# %DURATION%            a time string, using time denominations specified above
+
+MESSAGES:
+  COMMAND_FAIL_ARGS_COUNT_OVER:
+    message: '&cToo many arguments!'
+    enabled: true
+
+  COMMAND_FAIL_ARGS_COUNT_UNDER:
+    message: '&cToo few arguments!'
+    enabled: true
+
+  COMMAND_FAIL_PERMISSION_HELP:
+    message: "&cYou do not have permission to view help!"
+    enabled: true
+
+  COMMAND_FAIL_PERMISSION_RELOAD:
+    message: "&cYou do not have permission to reload the configuration!"
+    enabled: true
+
+  COMMAND_FAIL_PERMISSION_STATUS:
+    message: '&cYou do not have permission to view plugin settings!'
+    enabled: true
+
+  COMMAND_FAIL_INVALID:
+    message: '&cThat is not a valid command!'
+    enabled: true
+
+
+  COMMAND_SUCCESS_RELOAD:
+    message: '&bconfiguration reloaded.'
+    enabled: true
+
+
+  COMMAND_HELP_HELP:
+    message: '&eDisplays help for graveyard commands.'
+    enabled: true
+
+  COMMAND_HELP_RELOAD:
+    message: '&eReloads the configuration without needing to restart the server.'
+    enabled: true
+
+  COMMAND_HELP_STATUS:
+    message: '&eDisplays plugin configuration settings.'
+    enabled: true
+
+  COMMAND_HELP_USAGE_HEADER:
+    message: "&eCommand usage:"
+    enabled: true
+
+
+  # Message to display on kick
+  ACTION_PLAYER_KICK:
+    message: "You've been temp banned!"
+    enabled: true
+
+  # Message to display on join, before ban has expired
+  ACTION_PLAYER_BAN:
+    message: "You're temp banned!"
+    enabled: true
+
+
+  LOG_PLAYER_BAN:
+    message: "%PLAYER% was banned on death for %DURATION%."
+    enabled: true
+
+  LOG_PLAYER_IP_BAN:
+    message: "IP address %PLAYER_IP% for player %PLAYER% was banned on death for %DURATION%."
+    enabled: true

@@ -25,12 +25,6 @@ ban-time: 1440
 # kick delay (in seconds)
 kick-delay: 1
 
-# Message to display on kick
-kick-message: "You've been temp banned!"
-
-# Message to display on join, before ban has expired
-ban-message: "You're temp banned!"
-
 # Enable sounds
 sound-effects: true
 

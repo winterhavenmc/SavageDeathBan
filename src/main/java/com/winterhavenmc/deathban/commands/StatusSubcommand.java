@@ -18,6 +18,7 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
+import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.sounds.SoundId;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -43,7 +44,7 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 		this.plugin = Objects.requireNonNull(plugin);
 		this.name = "status";
 		this.usageString = "/deathban status";
-		this.description = "Display plugin configuration settings";
+		this.description = MessageId.COMMAND_HELP_STATUS;
 		this.permission = "deathban.status";
 	}
 
@@ -53,7 +54,7 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 
 		// if command sender does not have permission to view status, output error message and return true
 		if (!sender.hasPermission(permission)) {
-			sender.sendMessage("You do not have permission to use the status command!");
+			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_STATUS).send();
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;
 		}
@@ -70,6 +71,18 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 
 		sender.sendMessage(ChatColor.GREEN + "Ban time: "
 				+ ChatColor.RESET + plugin.getConfig().getLong("ban-time"));
+
+		sender.sendMessage(ChatColor.GREEN + "Ban IP: "
+				+ ChatColor.RESET + plugin.getConfig().getString("ban-ip"));
+
+		sender.sendMessage(ChatColor.GREEN + "Kick delay: "
+				+ ChatColor.RESET + plugin.getConfig().getString("kick-delay"));
+
+		sender.sendMessage(ChatColor.GREEN + "Sound effects: "
+				+ ChatColor.RESET + plugin.getConfig().getString("sound-effects"));
+
+		sender.sendMessage(ChatColor.GREEN + "Log bans: "
+				+ ChatColor.RESET + plugin.getConfig().getString("log-bans"));
 
 		sender.sendMessage(ChatColor.GREEN + "Enabled Worlds: "
 				+ ChatColor.RESET + plugin.worldManager.getEnabledWorldNames().toString());

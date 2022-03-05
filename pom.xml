@@ -70,17 +70,24 @@
 			<version>3.0.0</version>
 		</dependency>
 
-		<!-- WorldManagerLib -->
+		<!-- MessageBuilderLib -->
 		<dependency>
 			<groupId>com.winterhaven-mc</groupId>
-			<artifactId>world-manager-lib</artifactId>
-			<version>1.11.0</version>
+			<artifactId>message-builder-lib</artifactId>
+			<version>1.11.2</version>
 		</dependency>
 
 		<!-- SoundConfigLib -->
 		<dependency>
 			<groupId>com.winterhaven-mc</groupId>
 			<artifactId>sound-config-lib</artifactId>
+			<version>1.11.0</version>
+		</dependency>
+
+		<!-- WorldManagerLib -->
+		<dependency>
+			<groupId>com.winterhaven-mc</groupId>
+			<artifactId>world-manager-lib</artifactId>
 			<version>1.11.0</version>
 		</dependency>
 	</dependencies>
@@ -164,8 +171,9 @@
 							</filters>
 							<artifactSet>
 								<includes>
-									<include>com.winterhaven-mc:world-manager-lib</include>
+									<include>com.winterhaven-mc:message-builder-lib</include>
 									<include>com.winterhaven-mc:sound-config-lib</include>
+									<include>com.winterhaven-mc:world-manager-lib</include>
 									<include>org.bstats</include>
 								</includes>
 							</artifactSet>

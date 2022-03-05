@@ -2,6 +2,8 @@ package com.winterhavenmc.deathban.eventhandlers;
 
 import com.winterhavenmc.deathban.PluginMain;
 
+import com.winterhavenmc.deathban.messages.Macro;
+import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.tasks.KickPlayerTask;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -12,7 +14,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.net.InetSocketAddress;
-import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -116,8 +117,11 @@ public class PlayerEventHandler implements Listener {
 		// get ban list
 		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
 
+		// get ban message from language file
+		String banMessage = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN).toString();
+
 		// add player to ban list
-		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), getExpireDate(), BAN_SOURCE);
+		BanEntry banEntry = banList.addBan(player.getName(), banMessage, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (banEntry != null) {
@@ -125,7 +129,11 @@ public class PlayerEventHandler implements Listener {
 
 			// write log entry if configured
 			if (plugin.getConfig().getBoolean("log-bans")) {
-				plugin.getLogger().info(player.getName() + " was banned on death.");
+				// get log message from language file
+				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_BAN).toString();
+
+				// log message
+				plugin.getLogger().info(logMessage);
 			}
 		}
 	}
@@ -149,8 +157,13 @@ public class PlayerEventHandler implements Listener {
 		// get ip ban list
 		BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
 
+		// get ban message from language file
+		String message = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN)
+				.setMacro(Macro.DURATION, plugin.getConfig().getLong("ban-time"))
+				.toString();
+
 		// add player ip to ban list
-		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), getExpireDate(), BAN_SOURCE);
+		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), message, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (ipBanEntry != null) {
@@ -158,7 +171,13 @@ public class PlayerEventHandler implements Listener {
 
 			// write log entry if configured
 			if (plugin.getConfig().getBoolean("log-bans")) {
-				plugin.getLogger().info("IP Address " + playerAddress.getHostString() + " for player " + player.getName() + " was banned on death.");
+				// get log message from language file
+				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_IP_BAN)
+						.setMacro(Macro.PLAYER_IP, playerAddress.getHostString())
+						.toString();
+
+				// log message
+				plugin.getLogger().info(logMessage);
 			}
 		}
 	}

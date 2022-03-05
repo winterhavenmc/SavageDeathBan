@@ -18,6 +18,7 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
+import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.sounds.SoundId;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -46,7 +47,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 		this.subcommandRegistry = Objects.requireNonNull(subcommandRegistry);
 		this.name = "help";
 		this.usageString = "/deathban help [command]";
-		this.description = "Display plugin help";
+		this.description = MessageId.COMMAND_HELP_HELP;
 		this.permission = "deathban.help";
 	}
 
@@ -78,7 +79,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 
 		// if command sender does not have permission to display help, output error message and return true
 		if (!sender.hasPermission(permission)) {
-			sender.sendMessage("You do not have permission to use the help command!");
+			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_HELP).send();
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;
 		}
@@ -108,13 +109,13 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 
 		// if subcommand found in map, display help message and usage
 		if (subcommand != null) {
-			sender.sendMessage(subcommand.getDescription());
+			plugin.messageBuilder.compose(sender, subcommand.getDescription()).send();
 			subcommand.displayUsage(sender);
 		}
 
 		// else display invalid command help message and usage for all commands
 		else {
-			sender.sendMessage("That is not a valid command!");
+			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_INVALID);
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_INVALID);
 			displayUsageAll(sender);
 		}
@@ -127,7 +128,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 	 */
 	void displayUsageAll(final CommandSender sender) {
 
-		sender.sendMessage("Command usage:");
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_HELP_USAGE_HEADER).send();
 		for (String subcommandName : subcommandRegistry.getKeys()) {
 			if (subcommandRegistry.getSubcommand(subcommandName) != null) {
 				subcommandRegistry.getSubcommand(subcommandName).displayUsage(sender);

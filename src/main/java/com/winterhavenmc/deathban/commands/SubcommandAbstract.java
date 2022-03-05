@@ -17,6 +17,7 @@
 
 package com.winterhavenmc.deathban.commands;
 
+import com.winterhavenmc.deathban.messages.MessageId;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -31,7 +32,7 @@ abstract class SubcommandAbstract implements Subcommand {
 	protected String name;
 	protected Collection<String> aliases = new HashSet<>();
 	protected String usageString;
-	protected String description;
+	protected MessageId description;
 	protected String permission;
 
 	@Override
@@ -50,7 +51,7 @@ abstract class SubcommandAbstract implements Subcommand {
 	}
 
 	@Override
-	public String getDescription() {
+	public MessageId getDescription() {
 		return description;
 	}
 

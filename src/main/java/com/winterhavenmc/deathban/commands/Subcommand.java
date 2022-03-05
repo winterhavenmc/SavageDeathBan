@@ -17,6 +17,7 @@
 
 package com.winterhavenmc.deathban.commands;
 
+import com.winterhavenmc.deathban.messages.MessageId;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -37,7 +38,7 @@ interface Subcommand {
 
 	void displayUsage(final CommandSender sender);
 
-	String getDescription();
+	MessageId getDescription();
 
 	String getPermission();
 
