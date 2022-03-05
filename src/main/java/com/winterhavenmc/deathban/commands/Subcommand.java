@@ -35,11 +35,10 @@ interface Subcommand {
 
 	Collection<String> getAliases();
 
-	@SuppressWarnings("unused")
-	String getUsage();
-
 	void displayUsage(final CommandSender sender);
 
 	String getDescription();
+
+	String getPermission();
 
 }

@@ -59,7 +59,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 		if (args.length == 2) {
 			if (args[0].equalsIgnoreCase("help")) {
 				for (String subcommand : subcommandRegistry.getKeys()) {
-					if (sender.hasPermission("deathban." + subcommand)
+					if (sender.hasPermission(subcommandRegistry.getSubcommand(subcommand).getPermission())
 							&& subcommand.startsWith(args[1].toLowerCase())
 							&& !subcommand.equalsIgnoreCase("help")) {
 						returnList.add(subcommand);
@@ -102,7 +102,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 	void displayHelp(final CommandSender sender, final String commandName) {
 
 		// get subcommand from map by name
-		Subcommand subcommand = subcommandRegistry.getCommand(commandName);
+		Subcommand subcommand = subcommandRegistry.getSubcommand(commandName);
 
 		// if subcommand found in map, display help message and usage
 		if (subcommand != null) {
@@ -126,8 +126,8 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 
 		sender.sendMessage("Command usage:");
 		for (String subcommandName : subcommandRegistry.getKeys()) {
-			if (subcommandRegistry.getCommand(subcommandName) != null) {
-				subcommandRegistry.getCommand(subcommandName).displayUsage(sender);
+			if (subcommandRegistry.getSubcommand(subcommandName) != null) {
+				subcommandRegistry.getSubcommand(subcommandName).displayUsage(sender);
 			}
 		}
 	}

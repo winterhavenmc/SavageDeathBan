@@ -32,6 +32,7 @@ import java.util.*;
 public final class CommandManager implements TabExecutor {
 
 	// reference to main class
+	@SuppressWarnings({"FieldCanBeLocal", "unused"})
 	private final PluginMain plugin;
 
 	// map of subcommands
@@ -72,7 +73,7 @@ public final class CommandManager implements TabExecutor {
 		if (args.length > 1) {
 
 			// get subcommand from map
-			Subcommand subcommand = subcommandRegistry.getCommand(args[0]);
+			Subcommand subcommand = subcommandRegistry.getSubcommand(args[0]);
 
 			// if no subcommand returned from map, return empty list
 			if (subcommand == null) {
@@ -111,11 +112,11 @@ public final class CommandManager implements TabExecutor {
 		}
 
 		// get subcommand from map by name
-		Subcommand subcommand = subcommandRegistry.getCommand(subcommandName);
+		Subcommand subcommand = subcommandRegistry.getSubcommand(subcommandName);
 
 		// if subcommand is null, get help command from map
 		if (subcommand == null) {
-			subcommand = subcommandRegistry.getCommand("help");
+			subcommand = subcommandRegistry.getSubcommand("help");
 		}
 
 		// execute subcommand
@@ -133,10 +134,10 @@ public final class CommandManager implements TabExecutor {
 
 		List<String> returnList = new ArrayList<>();
 
-		for (String subcommand : subcommandRegistry.getKeys()) {
-			if (sender.hasPermission("deathban." + subcommand)
-					&& subcommand.startsWith(matchString.toLowerCase())) {
-				returnList.add(subcommand);
+		for (String subcommandName : subcommandRegistry.getKeys()) {
+			if (sender.hasPermission(subcommandRegistry.getSubcommand(subcommandName).getPermission())
+					&& subcommandName.startsWith(matchString.toLowerCase())) {
+				returnList.add(subcommandName);
 			}
 		}
 		return returnList;

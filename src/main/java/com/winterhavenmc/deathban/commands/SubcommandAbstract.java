@@ -33,8 +33,6 @@ abstract class SubcommandAbstract implements Subcommand {
 	protected String usageString;
 	protected String description;
 	protected String permission;
-	protected int minArgs;
-	protected int maxArgs;
 
 	@Override
 	public String getName() {
@@ -47,11 +45,6 @@ abstract class SubcommandAbstract implements Subcommand {
 	}
 
 	@Override
-	public String getUsage() {
-		return usageString;
-	}
-
-	@Override
 	public void displayUsage(final CommandSender sender) {
 		sender.sendMessage(usageString);
 	}
@@ -59,6 +52,12 @@ abstract class SubcommandAbstract implements Subcommand {
 	@Override
 	public String getDescription() {
 		return description;
+	}
+
+
+	@Override
+	public String getPermission() {
+		return permission;
 	}
 
 

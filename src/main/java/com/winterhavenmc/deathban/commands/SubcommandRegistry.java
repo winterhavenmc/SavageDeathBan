@@ -32,12 +32,16 @@ final class SubcommandRegistry {
 	 */
 	void register(final Subcommand subcommand) {
 
+		// get subcommand name
 		String name = subcommand.getName();
 
+		// put subcommand in map, keyed by lowercase name
 		subcommandMap.put(name.toLowerCase(), subcommand);
 
+		// get subcommand aliases
 		subcommand.getAliases();
 
+		// put aliases in map, keyed by lowercase alias
 		for (String alias : subcommand.getAliases()) {
 			aliasMap.put(alias.toLowerCase(), name.toLowerCase());
 		}
@@ -49,14 +53,17 @@ final class SubcommandRegistry {
 	 * @param name the command to retrieve from the map
 	 * @return Subcommand - the subcommand instance, or null if no matching name
 	 */
-	Subcommand getCommand(final String name) {
+	Subcommand getSubcommand(final String name) {
 
-		String key = name;
+		// get key
+		String key = name.toLowerCase();
 
+		// check alias map for key and set key to subcommand name if found
 		if (aliasMap.containsKey(key)) {
 			key = aliasMap.get(key);
 		}
 
+		// return subcommand for key from map
 		return (subcommandMap.get(key));
 	}
 
