@@ -124,6 +124,11 @@ public class PlayerEventHandler implements Listener {
 		// save ban entry
 		if (banEntry != null) {
 			banEntry.save();
+
+			// write log entry if configured
+			if (plugin.getConfig().getBoolean("log-bans")) {
+				plugin.getLogger().info(player.getName() + " was banned on death.");
+			}
 		}
 	}
 
@@ -155,6 +160,11 @@ public class PlayerEventHandler implements Listener {
 		// save ban entry
 		if (ipBanEntry != null) {
 			ipBanEntry.save();
+
+			// write log entry if configured
+			if (plugin.getConfig().getBoolean("log-bans")) {
+				plugin.getLogger().info("IP Address " + playerAddress.getHostString() + " for player " + player.getName() + " was banned on death.");
+			}
 		}
 	}
 
