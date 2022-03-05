@@ -2,6 +2,7 @@ package com.winterhavenmc.deathban.eventhandlers;
 
 import com.winterhavenmc.deathban.PluginMain;
 
+import com.winterhavenmc.deathban.tasks.KickPlayerTask;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.entity.Player;
@@ -9,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.net.InetSocketAddress;
 import java.util.Date;
@@ -31,7 +31,8 @@ public class PlayerEventHandler implements Listener {
 	// set of player uuids that will be kicked on respawn
 	private final Set<UUID> kickSet = new HashSet<>();
 
-	private static final String banSource = "SavageDeathBan";
+	// constant ban source string
+	private static final String BAN_SOURCE = "SavageDeathBan";
 
 
 	/**
@@ -91,21 +92,16 @@ public class PlayerEventHandler implements Listener {
 	@EventHandler
 	public void onPlayerRespawn(final PlayerRespawnEvent event) {
 
-		// if player is in kick on respawn set, kick after configured delay
-		if (kickSet.contains(event.getPlayer().getUniqueId())) {
+		// get event player
+		Player player = event.getPlayer();
 
-			// run task to kick player after delay
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					// kick the player with configured message
-					event.getPlayer().kickPlayer(plugin.getConfig().getString("kick-message"));
-				}
-			}.runTaskLater(plugin, plugin.getConfig().getLong("kick-delay") * 20L);
+		// if player is in kick on respawn set, kick after configured delay
+		if (kickSet.contains(player.getUniqueId())) {
+			new KickPlayerTask(plugin, player).runTaskLater(plugin, plugin.getConfig().getLong("kick-delay") * 20L);
 		}
 
 		// remove player from kick on respawn set
-		kickSet.remove(event.getPlayer().getUniqueId());
+		kickSet.remove(player.getUniqueId());
 	}
 
 
@@ -123,7 +119,7 @@ public class PlayerEventHandler implements Listener {
 		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
 
 		// add player to ban list
-		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), expireDate, banSource);
+		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), expireDate, BAN_SOURCE);
 
 		// save ban entry
 		if (banEntry != null) {
@@ -154,7 +150,7 @@ public class PlayerEventHandler implements Listener {
 		BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
 
 		// add player ip to ban list
-		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), expireDate, banSource);
+		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), expireDate, BAN_SOURCE);
 
 		// save ban entry
 		if (ipBanEntry != null) {
