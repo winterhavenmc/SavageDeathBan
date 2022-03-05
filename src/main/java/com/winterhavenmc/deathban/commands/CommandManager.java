@@ -31,10 +31,6 @@ import java.util.*;
  */
 public final class CommandManager implements TabExecutor {
 
-	// reference to main class
-	@SuppressWarnings({"FieldCanBeLocal", "unused"})
-	private final PluginMain plugin;
-
 	// map of subcommands
 	private final SubcommandRegistry subcommandRegistry = new SubcommandRegistry();
 
@@ -45,9 +41,6 @@ public final class CommandManager implements TabExecutor {
 	 * @param plugin reference to main class
 	 */
 	public CommandManager(final PluginMain plugin) {
-
-		// set reference to main class
-		this.plugin = plugin;
 
 		// register this class as command executor
 		Objects.requireNonNull(plugin.getCommand("deathban")).setExecutor(this);
