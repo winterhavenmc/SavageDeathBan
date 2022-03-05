@@ -165,6 +165,7 @@
 							<artifactSet>
 								<includes>
 									<include>com.winterhaven-mc:world-manager-lib</include>
+									<include>com.winterhaven-mc:sound-config-lib</include>
 									<include>org.bstats</include>
 								</includes>
 							</artifactSet>
