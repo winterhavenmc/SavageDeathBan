@@ -16,14 +16,23 @@ permissions:
     description: Allow player exemption from death ban.
     default: op
 
-  deathban.reload:
-    description: Allow use of the reload subcommand.
-    default: op
-
   deathban.help:
     description: Allow use of the help subcommand.
+    default: op
+
+  deathban.reload:
+    description: Allow use of the reload subcommand.
     default: op
 
   deathban.status:
     description: Allow use of the status subcommand.
     default: op
+
+  deathban.admin:
+    description: "Give access to DeathBan admin commands."
+    default: op
+    children:
+      deathban.expempt: true
+      deathban.help: true
+      deathban.reload: true
+      deathban.status: true
