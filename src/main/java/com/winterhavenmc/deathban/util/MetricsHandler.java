@@ -3,7 +3,7 @@ package com.winterhavenmc.deathban.util;
 import com.winterhavenmc.deathban.PluginMain;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
-import org.bstats.charts.SingleLineChart;
+
 
 public class MetricsHandler {
 
