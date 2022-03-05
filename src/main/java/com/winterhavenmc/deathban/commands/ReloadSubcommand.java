@@ -18,6 +18,7 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
+import com.winterhavenmc.deathban.sounds.SoundId;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -52,6 +53,7 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 		// if sender does not have permission to reload config, send error message and return true
 		if (!sender.hasPermission(permission)) {
 			sender.sendMessage("You do not have permission to use the reload command!");
+			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;
 		}
 
@@ -63,6 +65,9 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 
 		// send reload success message
 		sender.sendMessage("DeathBan configuration reloaded!");
+
+		// play reload success sound for player
+		plugin.soundConfig.playSound(sender, SoundId.COMMAND_SUCCESS_RELOAD);
 
 		// return true to suppress bukkit usage message
 		return true;

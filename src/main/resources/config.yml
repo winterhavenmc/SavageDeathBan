@@ -27,3 +27,6 @@ kick-message: "You've been temp banned!"
 
 # Message to display on join, before ban has expired
 ban-message: "You're temp banned!"
+
+# Enable sounds
+sound-effects: true

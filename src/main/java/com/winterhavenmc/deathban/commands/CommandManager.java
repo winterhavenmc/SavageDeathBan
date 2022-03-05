@@ -85,7 +85,7 @@ public final class CommandManager implements TabExecutor {
 		}
 
 		// return list of subcommands for which sender has permission
-		return matchingCommands(sender, args[0]);
+		return matchCommands(sender, args[0]);
 	}
 
 
@@ -130,7 +130,7 @@ public final class CommandManager implements TabExecutor {
 	 * @param matchString the string prefix to match against command names
 	 * @return List of String - command names that match prefix and sender has permission
 	 */
-	private List<String> matchingCommands(final CommandSender sender, final String matchString) {
+	private List<String> matchCommands(final CommandSender sender, final String matchString) {
 
 		List<String> returnList = new ArrayList<>();
 

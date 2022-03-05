@@ -18,6 +18,7 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
+import com.winterhavenmc.deathban.sounds.SoundId;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -53,6 +54,7 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 		// if command sender does not have permission to view status, output error message and return true
 		if (!sender.hasPermission(permission)) {
 			sender.sendMessage("You do not have permission to use the status command!");
+			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;
 		}
 

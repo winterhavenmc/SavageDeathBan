@@ -18,6 +18,7 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
+import com.winterhavenmc.deathban.sounds.SoundId;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -78,6 +79,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 		// if command sender does not have permission to display help, output error message and return true
 		if (!sender.hasPermission(permission)) {
 			sender.sendMessage("You do not have permission to use the help command!");
+			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;
 		}
 
@@ -113,6 +115,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 		// else display invalid command help message and usage for all commands
 		else {
 			sender.sendMessage("That is not a valid command!");
+			plugin.soundConfig.playSound(sender, SoundId.COMMAND_INVALID);
 			displayUsageAll(sender);
 		}
 	}
