@@ -1,5 +1,7 @@
 # Configuration file for ${project.name} v${project.version}
 
+language: en-US
+
 # enabled worlds list
 # if this list is empty, all worlds will be added to the enabled worlds list
 # otherwise, only listed worlds will be added to the enabled worlds list
