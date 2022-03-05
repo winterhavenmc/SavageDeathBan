@@ -1,14 +1,17 @@
 package com.winterhavenmc.deathban.eventhandlers;
 
 import com.winterhavenmc.deathban.PluginMain;
+
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.net.InetSocketAddress;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -66,6 +69,9 @@ public class PlayerEventHandler implements Listener {
 			return;
 		}
 
+		// get event player
+		Player player = event.getEntity();
+
 		// get expiration date
 		Date expireDate = new Date(System.currentTimeMillis() + MINUTES.toMillis(plugin.getConfig().getLong("ban-time")));
 
@@ -73,11 +79,34 @@ public class PlayerEventHandler implements Listener {
 		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
 
 		// add player to ban list
-		BanEntry banEntry = banList.addBan(event.getEntity().getName(), plugin.getConfig().getString("ban-message"), expireDate, "SavageDeathBan");
+		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), expireDate, "SavageDeathBan");
 
 		// save ban entry
 		if (banEntry != null) {
 			banEntry.save();
+		}
+
+		// ban player ip if configured
+		if (plugin.getConfig().getBoolean("ban-ip")) {
+
+			// get player ip
+			InetSocketAddress playerAddress = player.getAddress();
+
+			// if player address is null, do nothing and return
+			if (playerAddress == null) {
+				return;
+			}
+
+			// get ip ban list
+			BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
+
+			// add player ip to ban list
+			BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), expireDate, "SavageDeathBan");
+
+			// save ban entry
+			if (ipBanEntry != null) {
+				ipBanEntry.save();
+			}
 		}
 
 		// put player in kick set

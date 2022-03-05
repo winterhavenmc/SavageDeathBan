@@ -16,6 +16,9 @@ disabled-worlds: []
 #  - disabled_world2
 
 
+# ban player ip
+ban-ip: false
+
 # ban time (in minutes)
 ban-time: 1440
 
