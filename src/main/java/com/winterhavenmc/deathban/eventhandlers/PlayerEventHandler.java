@@ -31,6 +31,8 @@ public class PlayerEventHandler implements Listener {
 	// set of player uuids that will be kicked on respawn
 	private final Set<UUID> kickSet = new HashSet<>();
 
+	private static final String banSource = "SavageDeathBan";
+
 
 	/**
 	 * Class constructor
@@ -55,62 +57,29 @@ public class PlayerEventHandler implements Listener {
 	@EventHandler
 	public void onPlayerDeath(final PlayerDeathEvent event) {
 
-		plugin.getLogger().info("PlayerDeathEvent handled.");
+		// get event player
+		Player player = event.getEntity();
 
 		// if player has exempt permission, do nothing and return
-		if (event.getEntity().hasPermission("deathban.exempt")) {
-			plugin.getLogger().info("Player has exempt permission.");
+		if (player.hasPermission("deathban.exempt")) {
 			return;
 		}
 
 		// if world is not enabled, do nothing and return
-		if (!plugin.worldManager.isEnabled(event.getEntity().getWorld())) {
-			plugin.getLogger().info("Player world is not enabled.");
+		if (!plugin.worldManager.isEnabled(player.getWorld())) {
 			return;
 		}
 
-		// get event player
-		Player player = event.getEntity();
-
-		// get expiration date
-		Date expireDate = new Date(System.currentTimeMillis() + MINUTES.toMillis(plugin.getConfig().getLong("ban-time")));
-
-		// get ban list
-		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
-
-		// add player to ban list
-		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), expireDate, "SavageDeathBan");
-
-		// save ban entry
-		if (banEntry != null) {
-			banEntry.save();
-		}
+		// ban player
+		banPlayer(player);
 
 		// ban player ip if configured
 		if (plugin.getConfig().getBoolean("ban-ip")) {
-
-			// get player ip
-			InetSocketAddress playerAddress = player.getAddress();
-
-			// if player address is null, do nothing and return
-			if (playerAddress == null) {
-				return;
-			}
-
-			// get ip ban list
-			BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
-
-			// add player ip to ban list
-			BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), expireDate, "SavageDeathBan");
-
-			// save ban entry
-			if (ipBanEntry != null) {
-				ipBanEntry.save();
-			}
+			banPlayerIp(player);
 		}
 
-		// put player in kick set
-		kickSet.add(event.getEntity().getUniqueId());
+		// put player in kick on respawn set
+		kickSet.add(player.getUniqueId());
 	}
 
 
@@ -122,11 +91,8 @@ public class PlayerEventHandler implements Listener {
 	@EventHandler
 	public void onPlayerRespawn(final PlayerRespawnEvent event) {
 
-		// if player is in kick set, perform action
+		// if player is in kick on respawn set, kick after configured delay
 		if (kickSet.contains(event.getPlayer().getUniqueId())) {
-
-			// remove player from kick set
-			kickSet.remove(event.getPlayer().getUniqueId());
 
 			// run task to kick player after delay
 			new BukkitRunnable() {
@@ -136,6 +102,63 @@ public class PlayerEventHandler implements Listener {
 					event.getPlayer().kickPlayer(plugin.getConfig().getString("kick-message"));
 				}
 			}.runTaskLater(plugin, plugin.getConfig().getLong("kick-delay") * 20L);
+		}
+
+		// remove player from kick on respawn set
+		kickSet.remove(event.getPlayer().getUniqueId());
+	}
+
+
+	/**
+	 * Add player to ban list
+	 *
+	 * @param player the player to add to ban list
+	 */
+	private void banPlayer(final Player player) {
+
+		// get expiration date
+		Date expireDate = new Date(System.currentTimeMillis() + MINUTES.toMillis(plugin.getConfig().getLong("ban-time")));
+
+		// get ban list
+		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
+
+		// add player to ban list
+		BanEntry banEntry = banList.addBan(player.getName(), plugin.getConfig().getString("ban-message"), expireDate, banSource);
+
+		// save ban entry
+		if (banEntry != null) {
+			banEntry.save();
+		}
+	}
+
+
+	/**
+	 * Add player IP address to ban list
+	 *
+	 * @param player the player whose IP address to add to ban list
+	 */
+	private void banPlayerIp(final Player player) {
+
+		// get player ip
+		InetSocketAddress playerAddress = player.getAddress();
+
+		// if player address is null, do nothing and return
+		if (playerAddress == null) {
+			return;
+		}
+
+		// get expiration date
+		Date expireDate = new Date(System.currentTimeMillis() + MINUTES.toMillis(plugin.getConfig().getLong("ban-time")));
+
+		// get ip ban list
+		BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
+
+		// add player ip to ban list
+		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), plugin.getConfig().getString("ban-message"), expireDate, banSource);
+
+		// save ban entry
+		if (ipBanEntry != null) {
+			ipBanEntry.save();
 		}
 	}
 
