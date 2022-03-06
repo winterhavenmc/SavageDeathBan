@@ -70,6 +70,9 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 		// reload enabled worlds
 		plugin.worldManager.reload();
 
+		// reload sounds
+		plugin.soundConfig.reload();
+
 		// send reload success message
 		plugin.messageBuilder.compose(sender, MessageId.COMMAND_SUCCESS_RELOAD).send();
 
