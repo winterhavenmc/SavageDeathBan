@@ -6,7 +6,8 @@ This plugin temp bans a player on death for a configurable period of time.
 
 * Ban a player and optionally ban their IP address for a configurable amount of time
 * Integrates with the Bukkit ban system, defers to built in commands to view ban list or unban player/ip
-* Configurable messages and command help messages with text replacement macros
+* Per world enabled in configuration
+* Customizable messages and language localization
 * Optional sound effects
 
 ### Commands:
