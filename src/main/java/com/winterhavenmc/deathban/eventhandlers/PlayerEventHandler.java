@@ -19,7 +19,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
+import static com.winterhavenmc.util.TimeUnit.MINUTES;
+import static com.winterhavenmc.util.TimeUnit.SECONDS;
 
 
 /**
@@ -99,11 +100,11 @@ public class PlayerEventHandler implements Listener {
 
 		// if player is in kick on respawn set, kick after configured delay
 		if (kickSet.contains(player.getUniqueId())) {
-			new KickPlayerTask(plugin, player).runTaskLater(plugin, plugin.getConfig().getLong("kick-delay") * 20L);
-		}
+			new KickPlayerTask(plugin, player).runTaskLater(plugin, SECONDS.toMillis(plugin.getConfig().getLong("kick-delay")));
 
-		// remove player from kick on respawn set
-		kickSet.remove(player.getUniqueId());
+			// remove player from kick on respawn set
+			kickSet.remove(player.getUniqueId());
+		}
 	}
 
 
