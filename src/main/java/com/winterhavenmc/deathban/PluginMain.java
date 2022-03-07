@@ -9,9 +9,14 @@ import com.winterhavenmc.util.messagebuilder.MessageBuilder;
 import com.winterhavenmc.util.soundconfig.SoundConfiguration;
 import com.winterhavenmc.util.soundconfig.YamlSoundConfiguration;
 import com.winterhavenmc.util.worldmanager.WorldManager;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
-public final class PluginMain extends JavaPlugin {
+import java.io.File;
+
+
+public class PluginMain extends JavaPlugin {
 
 	// message builder
 	public MessageBuilder<MessageId, Macro> messageBuilder;
@@ -21,6 +26,21 @@ public final class PluginMain extends JavaPlugin {
 
 	// world manager
 	public WorldManager worldManager;
+
+
+	// constructor for testing
+	@SuppressWarnings("unused")
+	public PluginMain() {
+		super();
+	}
+
+
+	// constructor for testing
+	@SuppressWarnings("unused")
+	protected PluginMain(JavaPluginLoader loader, PluginDescriptionFile descriptionFile, File dataFolder, File file) {
+		super(loader, descriptionFile, dataFolder, file);
+	}
+
 
 	@Override
 	public void onEnable() {
