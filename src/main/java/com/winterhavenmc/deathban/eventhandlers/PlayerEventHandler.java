@@ -15,9 +15,9 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.net.InetSocketAddress;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.winterhavenmc.util.TimeUnit.MINUTES;
 import static com.winterhavenmc.util.TimeUnit.SECONDS;
@@ -32,7 +32,7 @@ public class PlayerEventHandler implements Listener {
 	private final PluginMain plugin;
 
 	// set of player uuids that will be kicked on respawn
-	private final Set<UUID> kickSet = new HashSet<>();
+	private final Set<UUID> kickSet = ConcurrentHashMap.newKeySet();
 
 	// constant ban source string
 	private static final String BAN_SOURCE = "SavageDeathBan";
