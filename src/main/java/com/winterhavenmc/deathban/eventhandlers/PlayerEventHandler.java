@@ -100,7 +100,7 @@ public class PlayerEventHandler implements Listener {
 
 		// if player is in kick on respawn set, kick after configured delay
 		if (kickSet.contains(player.getUniqueId())) {
-			new KickPlayerTask(plugin, player).runTaskLater(plugin, SECONDS.toMillis(plugin.getConfig().getLong("kick-delay")));
+			new KickPlayerTask(plugin, player).runTaskLater(plugin, SECONDS.toTicks(plugin.getConfig().getLong("kick-delay")));
 
 			// remove player from kick on respawn set
 			kickSet.remove(player.getUniqueId());
@@ -131,7 +131,9 @@ public class PlayerEventHandler implements Listener {
 			// write log entry if configured
 			if (plugin.getConfig().getBoolean("log-bans")) {
 				// get log message from language file
-				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_BAN).toString();
+				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_BAN)
+						.setMacro(Macro.DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
+						.toString();
 
 				// log message
 				plugin.getLogger().info(logMessage);
@@ -160,7 +162,7 @@ public class PlayerEventHandler implements Listener {
 
 		// get ban message from language file
 		String message = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN)
-				.setMacro(Macro.DURATION, plugin.getConfig().getLong("ban-time"))
+				.setMacro(Macro.DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
 				.toString();
 
 		// add player ip to ban list
