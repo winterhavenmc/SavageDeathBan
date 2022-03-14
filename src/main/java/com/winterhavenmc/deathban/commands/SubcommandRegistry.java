@@ -53,7 +53,11 @@ final class SubcommandRegistry {
 	 * @param name the command to retrieve from the map
 	 * @return Subcommand - the subcommand instance, or null if no matching name
 	 */
-	Subcommand getSubcommand(final String name) {
+	Optional<Subcommand> getSubcommand(final String name) {
+
+		if (name == null || name.isBlank()) {
+			return Optional.empty();
+		}
 
 		// get key
 		String key = name.toLowerCase();
@@ -64,7 +68,7 @@ final class SubcommandRegistry {
 		}
 
 		// return subcommand for key from map
-		return (subcommandMap.get(key));
+		return Optional.ofNullable(subcommandMap.get(key));
 	}
 
 

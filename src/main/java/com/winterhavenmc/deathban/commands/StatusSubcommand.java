@@ -46,7 +46,7 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 		this.name = "status";
 		this.usageString = "/deathban status";
 		this.description = MessageId.COMMAND_HELP_STATUS;
-		this.permission = "deathban.status";
+		this.permissionNode = "deathban.status";
 	}
 
 
@@ -54,7 +54,7 @@ final class StatusSubcommand extends SubcommandAbstract implements Subcommand {
 	public boolean onCommand(final CommandSender sender, final List<String> args) {
 
 		// if command sender does not have permission to view status, output error message and return true
-		if (!sender.hasPermission(permission)) {
+		if (!sender.hasPermission(permissionNode)) {
 			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_STATUS).send();
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;

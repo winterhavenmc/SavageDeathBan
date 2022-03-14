@@ -26,6 +26,7 @@ import org.bukkit.command.CommandSender;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 /**
@@ -48,7 +49,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 		this.name = "help";
 		this.usageString = "/deathban help [command]";
 		this.description = MessageId.COMMAND_HELP_HELP;
-		this.permission = "deathban.help";
+		this.permissionNode = "deathban.help";
 	}
 
 
@@ -60,11 +61,11 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 
 		if (args.length == 2) {
 			if (args[0].equalsIgnoreCase("help")) {
-				for (String subcommand : subcommandRegistry.getKeys()) {
-					if (sender.hasPermission(subcommandRegistry.getSubcommand(subcommand).getPermission())
-							&& subcommand.startsWith(args[1].toLowerCase())
-							&& !subcommand.equalsIgnoreCase("help")) {
-						returnList.add(subcommand);
+				for (String subcommandName : subcommandRegistry.getKeys()) {
+					if (sender.hasPermission("graveyard." + subcommandName)
+							&& subcommandName.startsWith(args[1].toLowerCase())
+							&& !subcommandName.equalsIgnoreCase("help")) {
+						returnList.add(subcommandName);
 					}
 				}
 			}
@@ -78,7 +79,7 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 	public boolean onCommand(final CommandSender sender, final List<String> args) {
 
 		// if command sender does not have permission to display help, output error message and return true
-		if (!sender.hasPermission(permission)) {
+		if (!sender.hasPermission(permissionNode)) {
 			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_HELP).send();
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;
@@ -90,27 +91,55 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 			return true;
 		}
 
-		// get subcommand name
-		String subcommandName = args.get(0);
-		displayHelp(sender, subcommandName);
+		// display subcommand help message or invalid command message
+		subcommandRegistry.getSubcommand(args.get(0)).ifPresentOrElse(
+				subcommand -> sendCommandHelpMessage(sender, subcommand),
+				() -> sendCommandInvalidMessage(sender)
+		);
+
 		return true;
 	}
 
 
 	/**
+	 * Send help description for subcommand to command sender
+	 *
+	 * @param sender the command sender
+	 * @param subcommand the subcommand to display help description
+	 */
+	private void sendCommandHelpMessage(CommandSender sender, Subcommand subcommand) {
+		plugin.messageBuilder.compose(sender, subcommand.getDescription()).send();
+		subcommand.displayUsage(sender);
+	}
+
+
+	/**
+	 * Send invalid subcommand message to command sender
+	 *
+	 * @param sender the command sender
+	 */
+	private void sendCommandInvalidMessage(CommandSender sender) {
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_HELP_INVALID).send();
+		plugin.soundConfig.playSound(sender, SoundId.COMMAND_INVALID);
+		displayUsageAll(sender);
+	}
+
+
+	/**
 	 * Display help message and usage for a command
+	 *
 	 * @param sender the command sender
 	 * @param commandName the name of the command for which to show help and usage
 	 */
 	void displayHelp(final CommandSender sender, final String commandName) {
 
 		// get subcommand from map by name
-		Subcommand subcommand = subcommandRegistry.getSubcommand(commandName);
+		Optional<Subcommand> subcommand = subcommandRegistry.getSubcommand(commandName);
 
 		// if subcommand found in map, display help message and usage
-		if (subcommand != null) {
-			plugin.messageBuilder.compose(sender, subcommand.getDescription()).send();
-			subcommand.displayUsage(sender);
+		if (subcommand.isPresent()) {
+			plugin.messageBuilder.compose(sender, subcommand.get().getDescription()).send();
+			subcommand.get().displayUsage(sender);
 		}
 
 		// else display invalid command help message and usage for all commands
@@ -124,14 +153,15 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 
 	/**
 	 * Display usage message for all commands
+	 *
 	 * @param sender the command sender
 	 */
 	void displayUsageAll(final CommandSender sender) {
 
 		plugin.messageBuilder.compose(sender, MessageId.COMMAND_HELP_USAGE_HEADER).send();
 		for (String subcommandName : subcommandRegistry.getKeys()) {
-			if (subcommandRegistry.getSubcommand(subcommandName) != null) {
-				subcommandRegistry.getSubcommand(subcommandName).displayUsage(sender);
+			if (subcommandRegistry.getSubcommand(subcommandName).isPresent()) {
+				subcommandRegistry.getSubcommand(subcommandName).get().displayUsage(sender);
 			}
 		}
 	}

@@ -44,7 +44,7 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 		this.name = "reload";
 		this.usageString = "/deathban reload";
 		this.description = MessageId.COMMAND_HELP_RELOAD;
-		this.permission = "deathban.reload";
+		this.permissionNode = "deathban.reload";
 	}
 
 
@@ -52,7 +52,7 @@ final class ReloadSubcommand extends SubcommandAbstract implements Subcommand {
 	public boolean onCommand(final CommandSender sender, final List<String> args) {
 
 		// if sender does not have permission to reload config, send error message and return true
-		if (!sender.hasPermission(permission)) {
+		if (!sender.hasPermission(permissionNode)) {
 			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_RELOAD).send();
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;

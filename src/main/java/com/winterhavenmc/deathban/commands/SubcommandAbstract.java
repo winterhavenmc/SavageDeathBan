@@ -33,7 +33,7 @@ abstract class SubcommandAbstract implements Subcommand {
 	protected Collection<String> aliases = new HashSet<>();
 	protected String usageString;
 	protected MessageId description;
-	protected String permission;
+	protected String permissionNode;
 
 	@Override
 	public String getName() {
@@ -57,8 +57,8 @@ abstract class SubcommandAbstract implements Subcommand {
 
 
 	@Override
-	public String getPermission() {
-		return permission;
+	public String getPermissionNode() {
+		return permissionNode;
 	}
 
 
