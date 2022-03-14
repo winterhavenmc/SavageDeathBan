@@ -62,10 +62,6 @@ MESSAGES:
     message: '&eDisplays plugin configuration settings.'
     enabled: true
 
-  COMMAND_HELP_INVALID:
-    string: "&cThat is not a valid command!"
-    enabled: true
-
   COMMAND_HELP_USAGE_HEADER:
     message: "&eCommand usage:"
     enabled: true

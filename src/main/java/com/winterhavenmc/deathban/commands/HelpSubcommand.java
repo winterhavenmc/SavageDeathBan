@@ -26,7 +26,6 @@ import org.bukkit.command.CommandSender;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 /**
@@ -119,35 +118,9 @@ final class HelpSubcommand extends SubcommandAbstract implements Subcommand {
 	 * @param sender the command sender
 	 */
 	private void sendCommandInvalidMessage(CommandSender sender) {
-		plugin.messageBuilder.compose(sender, MessageId.COMMAND_HELP_INVALID).send();
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_INVALID).send();
 		plugin.soundConfig.playSound(sender, SoundId.COMMAND_INVALID);
 		displayUsageAll(sender);
-	}
-
-
-	/**
-	 * Display help message and usage for a command
-	 *
-	 * @param sender the command sender
-	 * @param commandName the name of the command for which to show help and usage
-	 */
-	void displayHelp(final CommandSender sender, final String commandName) {
-
-		// get subcommand from map by name
-		Optional<Subcommand> subcommand = subcommandRegistry.getSubcommand(commandName);
-
-		// if subcommand found in map, display help message and usage
-		if (subcommand.isPresent()) {
-			plugin.messageBuilder.compose(sender, subcommand.get().getDescription()).send();
-			subcommand.get().displayUsage(sender);
-		}
-
-		// else display invalid command help message and usage for all commands
-		else {
-			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_INVALID);
-			plugin.soundConfig.playSound(sender, SoundId.COMMAND_INVALID);
-			displayUsageAll(sender);
-		}
 	}
 
 
