@@ -3,6 +3,7 @@ package com.winterhavenmc.deathban.tasks;
 import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.messages.Macro;
 import com.winterhavenmc.deathban.messages.MessageId;
+
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 

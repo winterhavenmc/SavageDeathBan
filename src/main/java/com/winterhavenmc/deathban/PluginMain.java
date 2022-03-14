@@ -5,10 +5,12 @@ import com.winterhavenmc.deathban.eventhandlers.PlayerEventHandler;
 import com.winterhavenmc.deathban.messages.Macro;
 import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.util.MetricsHandler;
+
 import com.winterhavenmc.util.messagebuilder.MessageBuilder;
 import com.winterhavenmc.util.soundconfig.SoundConfiguration;
 import com.winterhavenmc.util.soundconfig.YamlSoundConfiguration;
 import com.winterhavenmc.util.worldmanager.WorldManager;
+
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;

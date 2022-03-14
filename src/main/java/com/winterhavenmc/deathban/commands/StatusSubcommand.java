@@ -20,6 +20,7 @@ package com.winterhavenmc.deathban.commands;
 import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.sounds.SoundId;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
