@@ -24,9 +24,8 @@ import com.winterhavenmc.deathban.sounds.SoundId;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -47,7 +46,7 @@ final class HelpSubcommand extends AbstractSubcommand implements Subcommand {
 		this.plugin = Objects.requireNonNull(plugin);
 		this.subcommandRegistry = Objects.requireNonNull(subcommandRegistry);
 		this.name = "help";
-		this.usageString = "/deathban help [command]";
+		this.usageString = "/deathban help [subcommand]";
 		this.description = MessageId.COMMAND_HELP_HELP;
 		this.permissionNode = "deathban.help";
 	}
@@ -57,21 +56,17 @@ final class HelpSubcommand extends AbstractSubcommand implements Subcommand {
 	public List<String> onTabComplete(final CommandSender sender, final Command command,
 									  final String alias, final String[] args) {
 
-		List<String> returnList = new ArrayList<>();
-
-		if (args.length == 2) {
-			if (args[0].equalsIgnoreCase("help")) {
-				for (String subcommandName : subcommandRegistry.getKeys()) {
-					if (sender.hasPermission("graveyard." + subcommandName)
-							&& subcommandName.startsWith(args[1].toLowerCase())
-							&& !subcommandName.equalsIgnoreCase("help")) {
-						returnList.add(subcommandName);
-					}
-				}
-			}
+		if (args.length == 2 && args[0].equalsIgnoreCase(this.name)) {
+			return subcommandRegistry.getKeys().stream()
+					.map(subcommandRegistry::getSubcommand)
+					.filter(Optional::isPresent)
+					.filter(subcommand -> sender.hasPermission(subcommand.get().getPermissionNode()))
+					.map(subcommand -> subcommand.get().getName())
+					.filter(subCommandName -> subCommandName.toLowerCase().startsWith(args[1].toLowerCase()))
+					.filter(subCommandName -> !subCommandName.equalsIgnoreCase(this.name))
+					.collect(Collectors.toList());
 		}
-
-		return returnList;
+		return Collections.emptyList();
 	}
 
 
