@@ -10,8 +10,14 @@ commands:
     description: "This is the DeathBan base command."
     aliases: sdb
     usage: "/deathban [command]"
+    permission: 'deathban.command'
+    permission-message: 'You do not have permission to use the deathban command!'
 
 permissions:
+  deathban.command:
+    description: "Allow player to use the deathban command."
+    default: op
+
   deathban.exempt:
     description: "Allow player exemption from death ban."
     default: op
@@ -32,6 +38,7 @@ permissions:
     description: "Give access to DeathBan admin commands."
     default: op
     children:
+      deathban.command: true
       deathban.expempt: true
       deathban.help: true
       deathban.reload: true
