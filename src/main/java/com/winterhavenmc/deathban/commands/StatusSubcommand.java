@@ -26,7 +26,9 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+
+import static com.winterhavenmc.util.TimeUnit.MINUTES;
+import static com.winterhavenmc.util.TimeUnit.SECONDS;
 
 
 /**
@@ -74,12 +76,12 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand {
 		long banTime = plugin.getConfig().getLong("ban-time");
 
 		sender.sendMessage(ChatColor.GREEN + "Ban time: "
-				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(TimeUnit.MINUTES.toMillis(banTime)));
+				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(MINUTES.toMillis(banTime)));
 
 		long kickDelay = plugin.getConfig().getLong("kick-delay");
 
 		sender.sendMessage(ChatColor.GREEN + "Kick delay: "
-				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(TimeUnit.SECONDS.toMillis(kickDelay)));
+				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(SECONDS.toMillis(kickDelay)));
 
 		sender.sendMessage(ChatColor.GREEN + "Ban IP: "
 				+ ChatColor.RESET + plugin.getConfig().getString("ban-ip"));
