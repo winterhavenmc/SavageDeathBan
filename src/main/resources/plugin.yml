@@ -39,7 +39,7 @@ permissions:
     default: op
     children:
       deathban.command: true
-      deathban.expempt: true
+      deathban.exempt: true
       deathban.help: true
       deathban.reload: true
       deathban.status: true
