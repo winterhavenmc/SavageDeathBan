@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 public final class CommandManager implements TabExecutor {
 
 	// reference to plugin main class
-	PluginMain plugin;
+	private final PluginMain plugin;
 
 	// map of subcommands
 	private final SubcommandRegistry subcommandRegistry = new SubcommandRegistry();
