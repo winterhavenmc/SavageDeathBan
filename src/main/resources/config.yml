@@ -32,6 +32,3 @@ sound-effects: true
 
 # Write bans to log
 log-bans: true
-
-# Ban reason string
-ban-reason: "SavageDeathBan"

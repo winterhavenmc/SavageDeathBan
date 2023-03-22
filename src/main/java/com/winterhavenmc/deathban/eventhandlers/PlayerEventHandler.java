@@ -51,6 +51,9 @@ public class PlayerEventHandler implements Listener {
 	// set of player uuids that will be kicked on respawn
 	private final Set<UUID> kickSet = ConcurrentHashMap.newKeySet();
 
+	// constant ban source string
+	private static final String BAN_SOURCE = "SavageDeathBan";
+
 
 	/**
 	 * Class constructor
@@ -135,11 +138,8 @@ public class PlayerEventHandler implements Listener {
 		// get ban message from language file
 		String banMessage = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN).toString();
 
-		// get ban reason string from config file
-		String banReason = plugin.getConfig().getString("ban-reason");
-
 		// add player to ban list
-		BanEntry banEntry = banList.addBan(player.getName(), banMessage, getExpireDate(), banReason);
+		BanEntry banEntry = banList.addBan(player.getName(), banMessage, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (banEntry != null) {
@@ -182,11 +182,8 @@ public class PlayerEventHandler implements Listener {
 				.setMacro(Macro.DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
 				.toString();
 
-		// get ban reason string from config file
-		String banReason = plugin.getConfig().getString("ban-reason");
-
 		// add player ip to ban list
-		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), message, getExpireDate(), banReason);
+		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), message, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (ipBanEntry != null) {
