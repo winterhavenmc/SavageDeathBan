@@ -36,6 +36,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.winterhavenmc.deathban.messages.Macro.DURATION;
 import static com.winterhavenmc.util.TimeUnit.MINUTES;
 import static com.winterhavenmc.util.TimeUnit.SECONDS;
 
@@ -149,10 +150,10 @@ public class PlayerEventHandler implements Listener {
 			if (plugin.getConfig().getBoolean("log-bans")) {
 				// get log message from language file
 				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_BAN)
-						.setMacro(Macro.DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
+						.setMacro(DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
 						.toString();
 
-				// log message
+				// send log message string to logger
 				plugin.getLogger().info(logMessage);
 			}
 		}
@@ -179,7 +180,7 @@ public class PlayerEventHandler implements Listener {
 
 		// get ban message from language file
 		String message = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN)
-				.setMacro(Macro.DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
+				.setMacro(DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
 				.toString();
 
 		// add player ip to ban list
