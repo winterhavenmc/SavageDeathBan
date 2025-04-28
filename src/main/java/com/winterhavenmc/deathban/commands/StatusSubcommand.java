@@ -18,17 +18,17 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
+import com.winterhavenmc.deathban.messages.Macro;
 import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.sounds.SoundId;
-
+import com.winterhavenmc.deathban.util.Config;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
-
-import static com.winterhavenmc.util.TimeUnit.MINUTES;
-import static com.winterhavenmc.util.TimeUnit.SECONDS;
 
 
 /**
@@ -72,28 +72,29 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 		sender.sendMessage(ChatColor.DARK_AQUA
 				+ "[" + plugin.getName() + "] " + ChatColor.AQUA + "Version: " + ChatColor.RESET + versionString);
 
-		if (plugin.getConfig().getBoolean("debug")) {
+		if (Config.DEBUG.getBoolean(plugin))
+		{
 			sender.sendMessage(ChatColor.DARK_RED + "DEBUG: true");
 		}
 
-		long banTime = plugin.getConfig().getLong("ban-time");
+		long banTime = Config.BAN_TIME.getLong(plugin);
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_BAN_TIME)
+				.setMacro(Macro.DURATION, Duration.ofMinutes(banTime), ChronoUnit.SECONDS)
+				.send();
 
-		sender.sendMessage(ChatColor.GREEN + "Ban time: "
-				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(MINUTES.toMillis(banTime)));
-
-		long kickDelay = plugin.getConfig().getLong("kick-delay");
-
-		sender.sendMessage(ChatColor.GREEN + "Kick delay: "
-				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(SECONDS.toMillis(kickDelay)));
+		long kickDelay = Config.KICK_DELAY.getLong(plugin);
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_KICK_DELAY)
+				.setMacro(Macro.DURATION, Duration.ofMinutes(kickDelay), ChronoUnit.SECONDS)
+				.send();
 
 		sender.sendMessage(ChatColor.GREEN + "Ban IP: "
-				+ ChatColor.RESET + plugin.getConfig().getString("ban-ip"));
+				+ ChatColor.RESET + Config.BAN_IP.getBoolean(plugin));
 
 		sender.sendMessage(ChatColor.GREEN + "Sound effects: "
-				+ ChatColor.RESET + plugin.getConfig().getString("sound-effects"));
+				+ ChatColor.RESET + Config.SOUND_EFFECTS.getBoolean(plugin));
 
 		sender.sendMessage(ChatColor.GREEN + "Log bans: "
-				+ ChatColor.RESET + plugin.getConfig().getString("log-bans"));
+				+ ChatColor.RESET + Config.LOG_BANS.getBoolean(plugin));
 
 		sender.sendMessage(ChatColor.GREEN + "Enabled Worlds: "
 				+ ChatColor.RESET + plugin.worldManager.getEnabledWorldNames().toString());
