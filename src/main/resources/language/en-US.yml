@@ -14,74 +14,92 @@ TIME_STRINGS:
   LESS_THAN_ONE: 'less than one'
 
 
+#################################
+# Constant Strings
+#################################
+CONSTANTS:
+  TIME:
+    UNLIMITED: "unlimited"
+    LESS_THAN: "less than {NUMBER}"
+    LESS_THAN_ONE: "less than one"
+
+
 # Variable substitutions:
-# %PLAYER%              Message recipient's name
-# %PLAYER_IP%           Player ip address
-# %DURATION%            a time string, using time denominations specified above
+# {PLAYER}              Message recipient's name
+# {PLAYER_IP}           Player ip address
+# {DURATION}            a time string, using time denominations specified above
 
 MESSAGES:
   COMMAND_FAIL_ARGS_COUNT_OVER:
-    message: '&cToo many arguments!'
-    enabled: true
+    MESSAGE_TEXT: '&cToo many arguments!'
+    ENABLED: true
 
   COMMAND_FAIL_ARGS_COUNT_UNDER:
-    message: '&cToo few arguments!'
-    enabled: true
+    MESSAGE_TEXT: '&cToo few arguments!'
+    ENABLED: true
 
   COMMAND_FAIL_PERMISSION_HELP:
-    message: "&cYou do not have permission to view help!"
-    enabled: true
+    MESSAGE_TEXT: "&cYou do not have permission to view help!"
+    ENABLED: true
 
   COMMAND_FAIL_PERMISSION_RELOAD:
-    message: "&cYou do not have permission to reload the configuration!"
-    enabled: true
+    MESSAGE_TEXT: "&cYou do not have permission to reload the configuration!"
+    ENABLED: true
 
   COMMAND_FAIL_PERMISSION_STATUS:
-    message: '&cYou do not have permission to view plugin settings!'
-    enabled: true
+    MESSAGE_TEXT: '&cYou do not have permission to view plugin settings!'
+    ENABLED: true
 
   COMMAND_FAIL_INVALID:
-    message: '&cThat is not a valid command!'
-    enabled: true
+    MESSAGE_TEXT: '&cThat is not a valid command!'
+    ENABLED: true
 
 
   COMMAND_SUCCESS_RELOAD:
-    message: '&bconfiguration reloaded.'
-    enabled: true
+    MESSAGE_TEXT: '&bconfiguration reloaded.'
+    ENABLED: true
 
 
   COMMAND_HELP_HELP:
-    message: '&eDisplays help for graveyard commands.'
-    enabled: true
+    MESSAGE_TEXT: '&eDisplays help for graveyard commands.'
+    ENABLED: true
 
   COMMAND_HELP_RELOAD:
-    message: '&eReloads the configuration without needing to restart the server.'
-    enabled: true
+    MESSAGE_TEXT: '&eReloads the configuration without needing to restart the server.'
+    ENABLED: true
 
   COMMAND_HELP_STATUS:
-    message: '&eDisplays plugin configuration settings.'
-    enabled: true
+    MESSAGE_TEXT: '&eDisplays plugin configuration settings.'
+    ENABLED: true
 
   COMMAND_HELP_USAGE_HEADER:
-    message: "&eCommand usage:"
-    enabled: true
+    MESSAGE_TEXT: "&eCommand usage:"
+    ENABLED: true
+
+  COMMAND_STATUS_BAN_TIME:
+    MESSAGE_TEXT: '&aBan time:&r {DURATION}'
+    ENABLED: true
+
+  COMMAND_STATUS_KICK_DELAY:
+    MESSAGE_TEXT: '&aKick delay:&r {DURATION}'
+    ENABLED: true
 
 
   # Message to display on kick
   ACTION_PLAYER_KICK:
-    message: "You've been temp banned!"
-    enabled: true
+    MESSAGE_TEXT: "You've been temp banned!"
+    ENABLED: true
 
   # Message to display on join, before ban has expired
   ACTION_PLAYER_BAN:
-    message: "You're temp banned!"
-    enabled: true
+    MESSAGE_TEXT: "You're temp banned!"
+    ENABLED: true
 
 
   LOG_PLAYER_BAN:
-    message: "%PLAYER% was banned on death for %DURATION%."
-    enabled: true
+    MESSAGE_TEXT: "{PLAYER} was banned on death for {DURATION}."
+    ENABLED: true
 
   LOG_PLAYER_IP_BAN:
-    message: "IP address %PLAYER_IP% for player %PLAYER% was banned on death for %DURATION%."
-    enabled: true
+    MESSAGE_TEXT: "IP address {PLAYER_IP} for player {PLAYER} was banned on death for {DURATION}."
+    ENABLED: true
