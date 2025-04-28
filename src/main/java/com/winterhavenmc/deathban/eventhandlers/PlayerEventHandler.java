@@ -21,7 +21,6 @@ import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.messages.Macro;
 import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.tasks.KickPlayerTask;
-
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.entity.Player;
@@ -31,14 +30,16 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.net.InetSocketAddress;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static com.winterhavenmc.deathban.messages.Macro.DURATION;
-import static com.winterhavenmc.util.TimeUnit.MINUTES;
-import static com.winterhavenmc.util.TimeUnit.SECONDS;
+import static com.winterhavenmc.library.time.TimeUnit.MINUTES;
+import static com.winterhavenmc.library.time.TimeUnit.SECONDS;
 
 
 /**
@@ -156,7 +157,7 @@ public class PlayerEventHandler implements Listener
 			{
 				// get log message from language file
 				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_BAN)
-						.setMacro(DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
+						.setMacro(DURATION, Duration.ofMinutes(plugin.getConfig().getLong("ban-time")), ChronoUnit.MINUTES)
 						.toString();
 
 				// send log message string to logger
