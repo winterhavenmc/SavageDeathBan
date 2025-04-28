@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Tim Savage.
+ * Copyright (c) 2022-2025 Tim Savage.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@ import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 
 
-public class MetricsHandler {
-
-	public MetricsHandler(PluginMain plugin) {
-
+public class MetricsHandler
+{
+	public MetricsHandler(PluginMain plugin)
+	{
 		Metrics metrics = new Metrics(plugin, 14522);
 
 		metrics.addCustomChart(new SimplePie("language", () -> plugin.getConfig().getString("language")));
@@ -35,7 +35,6 @@ public class MetricsHandler {
 		metrics.addCustomChart(new SimplePie("ban_time", () -> plugin.getConfig().getString("ban-time")));
 
 		metrics.addCustomChart(new SimplePie("kick_delay", () -> plugin.getConfig().getString("kick-delay")));
-
 	}
 
 }

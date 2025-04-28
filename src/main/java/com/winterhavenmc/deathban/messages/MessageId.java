@@ -17,8 +17,8 @@
 
 package com.winterhavenmc.deathban.messages;
 
-public enum MessageId {
-
+public enum MessageId
+{
 	COMMAND_FAIL_PERMISSION_HELP,
 	COMMAND_FAIL_PERMISSION_RELOAD,
 	COMMAND_FAIL_PERMISSION_STATUS,
@@ -36,5 +36,4 @@ public enum MessageId {
 
 	LOG_PLAYER_BAN,
 	LOG_PLAYER_IP_BAN,
-
 }

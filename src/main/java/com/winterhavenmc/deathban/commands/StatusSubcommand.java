@@ -35,16 +35,18 @@ import static com.winterhavenmc.util.TimeUnit.SECONDS;
  * Status command implementation<br>
  * Display plugin settings
  */
-final class StatusSubcommand extends AbstractSubcommand implements Subcommand {
-
+final class StatusSubcommand extends AbstractSubcommand implements Subcommand
+{
 	private final PluginMain plugin;
 
 
 	/**
 	 * Class constructor
+	 *
 	 * @param plugin reference to plugin main class instance
 	 */
-	StatusSubcommand(final PluginMain plugin) {
+	StatusSubcommand(final PluginMain plugin)
+	{
 		this.plugin = Objects.requireNonNull(plugin);
 		this.name = "status";
 		this.usageString = "/deathban status";
@@ -54,10 +56,11 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand {
 
 
 	@Override
-	public boolean onCommand(final CommandSender sender, final List<String> args) {
-
+	public boolean onCommand(final CommandSender sender, final List<String> args)
+	{
 		// if command sender does not have permission to view status, output error message and return true
-		if (!sender.hasPermission(permissionNode)) {
+		if (!sender.hasPermission(permissionNode))
+		{
 			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_STATUS).send();
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;

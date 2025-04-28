@@ -20,21 +20,26 @@ package com.winterhavenmc.deathban.commands;
 import com.winterhavenmc.deathban.PluginMain;
 
 
-enum SubcommandType {
+enum SubcommandType
+{
 
-	RELOAD() {
-		@Override
-		Subcommand create(final PluginMain plugin) {
-			return new ReloadSubcommand(plugin);
-		}
-	},
+	RELOAD()
+			{
+				@Override
+				Subcommand create(final PluginMain plugin)
+				{
+					return new ReloadSubcommand(plugin);
+				}
+			},
 
-	STATUS() {
-		@Override
-		Subcommand create(final PluginMain plugin) {
-			return new StatusSubcommand(plugin);
-		}
-	};
+	STATUS()
+			{
+				@Override
+				Subcommand create(final PluginMain plugin)
+				{
+					return new StatusSubcommand(plugin);
+				}
+			};
 
 	abstract Subcommand create(final PluginMain plugin);
 
