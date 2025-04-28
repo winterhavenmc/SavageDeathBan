@@ -47,20 +47,6 @@ public class PluginMain extends JavaPlugin {
 	public WorldManager worldManager;
 
 
-	// constructor for testing
-	@SuppressWarnings("unused")
-	public PluginMain() {
-		super();
-	}
-
-
-	// constructor for testing
-	@SuppressWarnings("unused")
-	protected PluginMain(JavaPluginLoader loader, PluginDescriptionFile descriptionFile, File dataFolder, File file) {
-		super(loader, descriptionFile, dataFolder, file);
-	}
-
-
 	@Override
 	public void onEnable() {
 
