@@ -47,6 +47,7 @@ public class KickPlayerTask extends BukkitRunnable
 		Duration duration = Duration.ofMinutes(plugin.getConfig().getLong("ban-time"));
 
 		// get kick message from language file
+		// TODO: macro substitution in toString() messages not currently supported
 		String message = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_KICK)
 				.setMacro(Macro.DURATION, duration, ChronoUnit.MINUTES)
 				.toString();

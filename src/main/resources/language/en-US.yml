@@ -62,12 +62,12 @@ MESSAGES:
     ENABLED: true
 
 
-  # Message to display on kick
+  # Message to display on kick (NOTE: macro substitutions not currently supported in this message)
   ACTION_PLAYER_KICK:
     MESSAGE_TEXT: "You've been temp banned!"
     ENABLED: true
 
-  # Message to display on join, before ban has expired
+  # Message to display on join, before ban has expired (NOTE: macro substitutions not currently supported in this message)
   ACTION_PLAYER_BAN:
     MESSAGE_TEXT: "You're temp banned!"
     ENABLED: true
