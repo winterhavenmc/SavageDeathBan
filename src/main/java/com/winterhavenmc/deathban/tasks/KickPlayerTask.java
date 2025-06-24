@@ -24,7 +24,8 @@ import com.winterhavenmc.deathban.messages.MessageId;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 
 public class KickPlayerTask extends BukkitRunnable
@@ -42,9 +43,12 @@ public class KickPlayerTask extends BukkitRunnable
 
 	public void run()
 	{
+		// get configured ban duration
+		Duration duration = Duration.ofMinutes(plugin.getConfig().getLong("ban-time"));
+
 		// get kick message from language file
 		String message = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_KICK)
-				.setMacro(Macro.DURATION, SECONDS.toMillis(plugin.getConfig().getLong("ban-time")))
+				.setMacro(Macro.DURATION, duration, ChronoUnit.MINUTES)
 				.toString();
 
 		// kick the player with configured message
