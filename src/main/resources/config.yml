@@ -1,5 +1,6 @@
 # Configuration file for ${project.name} v${project.version}
 
+# localized language file
 language: en-US
 
 # enabled worlds list
