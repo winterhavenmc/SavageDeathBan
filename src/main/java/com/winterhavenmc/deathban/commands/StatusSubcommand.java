@@ -67,40 +67,112 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 		}
 
 		// output config settings
-		String versionString = plugin.getDescription().getVersion();
-
-		sender.sendMessage(ChatColor.DARK_AQUA
-				+ "[" + plugin.getName() + "] " + ChatColor.AQUA + "Version: " + ChatColor.RESET + versionString);
-
-		if (Config.DEBUG.getBoolean(plugin))
-		{
-			sender.sendMessage(ChatColor.DARK_RED + "DEBUG: true");
-		}
-
-		long banTime = Config.BAN_TIME.getLong(plugin);
-		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_BAN_TIME)
-				.setMacro(Macro.DURATION, Duration.ofMinutes(banTime), ChronoUnit.SECONDS)
-				.send();
-
-		long kickDelay = Config.KICK_DELAY.getLong(plugin);
-		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_KICK_DELAY)
-				.setMacro(Macro.DURATION, Duration.ofMinutes(kickDelay), ChronoUnit.SECONDS)
-				.send();
-
-		sender.sendMessage(ChatColor.GREEN + "Ban IP: "
-				+ ChatColor.RESET + Config.BAN_IP.getBoolean(plugin));
-
-		sender.sendMessage(ChatColor.GREEN + "Sound effects: "
-				+ ChatColor.RESET + Config.SOUND_EFFECTS.getBoolean(plugin));
-
-		sender.sendMessage(ChatColor.GREEN + "Log bans: "
-				+ ChatColor.RESET + Config.LOG_BANS.getBoolean(plugin));
-
-		sender.sendMessage(ChatColor.GREEN + "Enabled Worlds: "
-				+ ChatColor.RESET + plugin.worldManager.getEnabledWorldNames().toString());
+		displayStatusBanner(sender);
+		displayPluginVersion(sender);
+		displayDebugSetting(sender);
+		displayLanguage(sender);
+		displayLocale(sender);
+		displayBanTime(sender);
+		displayKickDelay(sender);
+		displayBanIp(sender);
+		displaySoundEffects(sender);
+		displayLogBans(sender);
+		displayEnabledWorlds(sender);
 
 		// always return true to suppress bukkit usage message
 		return true;
+	}
+
+
+	private void displayStatusBanner(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_BANNER)
+				.setMacro(Macro.PLUGIN, plugin.getDescription().getName())
+				.send();
+	}
+
+
+	private void displayPluginVersion(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_PLUGIN_VERSION)
+				.setMacro(Macro.VERSION, plugin.getDescription().getVersion())
+				.send();
+	}
+
+
+	private void displayDebugSetting(final CommandSender sender)
+	{
+		if (Config.DEBUG.getBoolean(plugin.getConfig()))
+		{
+			sender.sendMessage(ChatColor.DARK_RED + "DEBUG: true");
+		}
+	}
+
+
+	private void displayLanguage(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_LANGUAGE)
+				.setMacro(Macro.LANGUAGE, plugin.getConfig().getString("language"))
+				.send();
+	}
+
+
+	private void displayLocale(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_LOCALE)
+				.setMacro(Macro.LOCALE, plugin.getConfig().getString("locale"))
+				.send();
+	}
+
+
+	private void displayBanTime(final CommandSender sender)
+	{
+		long banTime = Config.BAN_TIME.getLong(plugin);
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_BAN_TIME)
+				.setMacro(Macro.DURATION, Duration.ofMinutes(banTime), ChronoUnit.MINUTES)
+				.send();
+	}
+
+
+	private void displayKickDelay(final CommandSender sender)
+	{
+		long kickDelay = Config.KICK_DELAY.getLong(plugin);
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_KICK_DELAY)
+				.setMacro(Macro.DURATION, Duration.ofSeconds(kickDelay), ChronoUnit.SECONDS)
+				.send();
+	}
+
+
+	private void displayBanIp(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_BAN_IP)
+				.setMacro(Macro.BAN_IP_SETTING, Config.BAN_IP.getBoolean(plugin.getConfig()))
+				.send();
+	}
+
+
+	private void displaySoundEffects(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_SOUND_EFFECTS)
+				.setMacro(Macro.SOUND_EFFECTS_SETTING, Config.SOUND_EFFECTS.getBoolean(plugin.getConfig()))
+				.send();
+	}
+
+
+	private void displayLogBans(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_LOG_BANS)
+				.setMacro(Macro.LOG_BANS_SETTING, Config.LOG_BANS.getBoolean(plugin.getConfig()))
+				.send();
+	}
+
+
+	private void displayEnabledWorlds(final CommandSender sender)
+	{
+		String worldList = plugin.worldManager.getEnabledWorldNames().toString();
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_ENABLED_WORLDS)
+				.setMacro(Macro.ENABLED_WORLDS, worldList)
+				.send();
 	}
 
 }
