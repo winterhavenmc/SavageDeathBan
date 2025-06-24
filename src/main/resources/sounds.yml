@@ -3,20 +3,20 @@
 COMMAND_INVALID:
   enabled: true
   player-only: true
-  sound: ENTITY_WANDERING_TRADER_AMBIENT
+  sound: minecraft:entity.wandering_trader.ambient
   volume: 1
   pitch: 1
 
 COMMAND_FAIL_PERMISSION:
   enabled: true
   player-only: true
-  sound: ENTITY_VILLAGER_NO
+  sound: minecraft:entity.villager.no
   volume: 1
   pitch: 1
 
 COMMAND_SUCCESS_RELOAD:
   enabled: true
   player-only: true
-  sound: BLOCK_NOTE_BLOCK_CHIME
+  sound: minecraft:block.note_block.chime
   volume: 1
   pitch: 1
