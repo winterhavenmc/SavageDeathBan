@@ -18,8 +18,10 @@
 package com.winterhavenmc.deathban.util;
 
 
+import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.Plugin;
 
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,7 +29,9 @@ import java.util.Locale;
 public enum Config
 {
 	DEBUG(Boolean.FALSE),
-	LANGUAGE(Locale.US.toLanguageTag()),
+	LANGUAGE("en-US"),
+	LOCALE(Locale.US.toLanguageTag()),
+	TIMEZONE(ZoneId.of("America/Chicago")),
 	ENABLED_WORLDS(List.of()),
 	DISABLED_WORLDS(List.of()),
 	BAN_IP(Boolean.FALSE),
@@ -62,12 +66,12 @@ public enum Config
 	/**
 	 * Get value as boolean for corresponding key in current configuration
 	 *
-	 * @param plugin {@code JavaPlugin} reference to the plugin instance
+	 * @param configuration {@code JavaPlugin} reference to the plugin configuration
 	 * @return {@code boolean} the referenced value in the current configuration
 	 */
-	public boolean getBoolean(final Plugin plugin)
+	public boolean getBoolean(final Configuration configuration)
 	{
-		return plugin.getConfig().getBoolean(asKey());
+		return configuration.getBoolean(asKey());
 	}
 
 

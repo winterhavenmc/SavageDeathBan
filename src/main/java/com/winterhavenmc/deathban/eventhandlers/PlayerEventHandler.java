@@ -139,13 +139,14 @@ public class PlayerEventHandler implements Listener
 	private void banPlayer(final Player player)
 	{
 		// get ban list
-		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
+		BanList<Player> banList = plugin.getServer().getBanList(BanList.Type.PROFILE);
 
 		// get ban message from language file
+		//TODO: MessageBuilder does not currently have a proper toString() method
 		String banMessage = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN).toString();
 
 		// add player to ban list
-		BanEntry banEntry = banList.addBan(player.getName(), banMessage, getExpireDate(), BAN_SOURCE);
+		BanEntry<Player> banEntry = banList.addBan(player, banMessage, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (banEntry != null)
@@ -184,7 +185,7 @@ public class PlayerEventHandler implements Listener
 		}
 
 		// get ip ban list
-		BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
+		BanList<InetSocketAddress> ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
 
 		// get ban message from language file
 		String message = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN)
@@ -192,7 +193,7 @@ public class PlayerEventHandler implements Listener
 				.toString();
 
 		// add player ip to ban list
-		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), message, getExpireDate(), BAN_SOURCE);
+		BanEntry<InetSocketAddress> ipBanEntry = ipBanList.addBan(playerAddress, message, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (ipBanEntry != null)

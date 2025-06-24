@@ -1,6 +1,13 @@
 # Configuration file for ${project.name} v${project.version}
 
+# Language file to use for messages
 language: en-US
+
+# Locale for time and number formatting
+#locale: en-US
+
+# timezone for date/time formatting (uses system default if not set)
+#timezone: America/Chicago
 
 # enabled worlds list
 # if this list is empty, all worlds will be added to the enabled worlds list
