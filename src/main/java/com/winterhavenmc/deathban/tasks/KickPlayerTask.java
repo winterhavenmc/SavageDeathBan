@@ -24,7 +24,7 @@ import com.winterhavenmc.deathban.messages.MessageId;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static com.winterhavenmc.util.TimeUnit.SECONDS;
+import static com.winterhavenmc.library.TimeUnit.SECONDS;
 
 public class KickPlayerTask extends BukkitRunnable {
 
