@@ -20,7 +20,6 @@ package com.winterhavenmc.deathban.commands;
 import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.sounds.SoundId;
-
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -31,16 +30,18 @@ import java.util.Objects;
  * Reload command implementation<br>
  * reloads plugin configuration
  */
-final class ReloadSubcommand extends AbstractSubcommand implements Subcommand {
-
+final class ReloadSubcommand extends AbstractSubcommand implements Subcommand
+{
 	private final PluginMain plugin;
 
 
 	/**
 	 * Class constructor
+	 *
 	 * @param plugin reference to plugin main class instance
 	 */
-	ReloadSubcommand(final PluginMain plugin) {
+	ReloadSubcommand(final PluginMain plugin)
+	{
 		this.plugin = Objects.requireNonNull(plugin);
 		this.name = "reload";
 		this.usageString = "/deathban reload";
@@ -50,10 +51,11 @@ final class ReloadSubcommand extends AbstractSubcommand implements Subcommand {
 
 
 	@Override
-	public boolean onCommand(final CommandSender sender, final List<String> args) {
-
+	public boolean onCommand(final CommandSender sender, final List<String> args)
+	{
 		// if sender does not have permission to reload config, send error message and return true
-		if (!sender.hasPermission(permissionNode)) {
+		if (!sender.hasPermission(permissionNode))
+		{
 			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_RELOAD).send();
 			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;

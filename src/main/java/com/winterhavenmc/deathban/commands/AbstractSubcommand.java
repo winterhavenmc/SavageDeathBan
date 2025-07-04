@@ -18,7 +18,6 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.messages.MessageId;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -28,8 +27,8 @@ import java.util.HashSet;
 import java.util.List;
 
 
-abstract class AbstractSubcommand implements Subcommand {
-
+abstract class AbstractSubcommand implements Subcommand
+{
 	protected String name;
 	protected Collection<String> aliases = new HashSet<>();
 	protected String usageString;
@@ -37,36 +36,41 @@ abstract class AbstractSubcommand implements Subcommand {
 	protected String permissionNode;
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
 	@Override
-	public Collection<String> getAliases() {
+	public Collection<String> getAliases()
+	{
 		return aliases;
 	}
 
 	@Override
-	public void displayUsage(final CommandSender sender) {
+	public void displayUsage(final CommandSender sender)
+	{
 		sender.sendMessage(usageString);
 	}
 
 	@Override
-	public MessageId getDescription() {
+	public MessageId getDescription()
+	{
 		return description;
 	}
 
 
 	@Override
-	public String getPermissionNode() {
+	public String getPermissionNode()
+	{
 		return permissionNode;
 	}
 
 
 	@Override
 	public List<String> onTabComplete(final CommandSender sender, final Command command,
-									  final String alias, final String[] args) {
-
+	                                  final String alias, final String[] args)
+	{
 		return Collections.emptyList();
 	}
 
