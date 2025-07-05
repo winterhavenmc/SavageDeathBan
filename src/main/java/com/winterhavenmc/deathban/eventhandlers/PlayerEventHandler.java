@@ -21,7 +21,6 @@ import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.messages.Macro;
 import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.tasks.KickPlayerTask;
-
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.entity.Player;
@@ -43,7 +42,8 @@ import static com.winterhavenmc.library.TimeUnit.SECONDS;
 /**
  * Class that implements event handlers for player related events
  */
-public class PlayerEventHandler implements Listener {
+public class PlayerEventHandler implements Listener
+{
 
 	// reference to plugin main class
 	private final PluginMain plugin;
@@ -60,7 +60,8 @@ public class PlayerEventHandler implements Listener {
 	 *
 	 * @param plugin reference to plugin main class
 	 */
-	public PlayerEventHandler(final PluginMain plugin) {
+	public PlayerEventHandler(final PluginMain plugin)
+	{
 
 		// set reference to plugin main class
 		this.plugin = plugin;
@@ -76,18 +77,21 @@ public class PlayerEventHandler implements Listener {
 	 * @param event the event handled by this method
 	 */
 	@EventHandler
-	public void onPlayerDeath(final PlayerDeathEvent event) {
+	public void onPlayerDeath(final PlayerDeathEvent event)
+	{
 
 		// get event player
 		Player player = event.getEntity();
 
 		// if player has exempt permission, do nothing and return
-		if (player.hasPermission("deathban.exempt")) {
+		if (player.hasPermission("deathban.exempt"))
+		{
 			return;
 		}
 
 		// if world is not enabled, do nothing and return
-		if (!plugin.worldManager.isEnabled(player.getWorld())) {
+		if (!plugin.worldManager.isEnabled(player.getWorld()))
+		{
 			return;
 		}
 
@@ -95,7 +99,8 @@ public class PlayerEventHandler implements Listener {
 		banPlayer(player);
 
 		// ban player ip if configured
-		if (plugin.getConfig().getBoolean("ban-ip")) {
+		if (plugin.getConfig().getBoolean("ban-ip"))
+		{
 			banPlayerIp(player);
 		}
 
@@ -110,13 +115,14 @@ public class PlayerEventHandler implements Listener {
 	 * @param event the event handled by this method
 	 */
 	@EventHandler
-	public void onPlayerRespawn(final PlayerRespawnEvent event) {
-
+	public void onPlayerRespawn(final PlayerRespawnEvent event)
+	{
 		// get event player
 		Player player = event.getPlayer();
 
 		// if player is in kick on respawn set, kick after configured delay
-		if (kickSet.contains(player.getUniqueId())) {
+		if (kickSet.contains(player.getUniqueId()))
+		{
 			new KickPlayerTask(plugin, player).runTaskLater(plugin, SECONDS.toTicks(plugin.getConfig().getLong("kick-delay")));
 
 			// remove player from kick on respawn set
@@ -130,8 +136,8 @@ public class PlayerEventHandler implements Listener {
 	 *
 	 * @param player the player to add to ban list
 	 */
-	private void banPlayer(final Player player) {
-
+	private void banPlayer(final Player player)
+	{
 		// get ban list
 		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
 
@@ -142,11 +148,13 @@ public class PlayerEventHandler implements Listener {
 		BanEntry banEntry = banList.addBan(player.getName(), banMessage, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
-		if (banEntry != null) {
+		if (banEntry != null)
+		{
 			banEntry.save();
 
 			// write log entry if configured
-			if (plugin.getConfig().getBoolean("log-bans")) {
+			if (plugin.getConfig().getBoolean("log-bans"))
+			{
 				// get log message from language file
 				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_BAN)
 						.setMacro(Macro.DURATION, MINUTES.toMillis(plugin.getConfig().getLong("ban-time")))
@@ -164,13 +172,14 @@ public class PlayerEventHandler implements Listener {
 	 *
 	 * @param player the player whose IP address to add to ban list
 	 */
-	private void banPlayerIp(final Player player) {
-
+	private void banPlayerIp(final Player player)
+	{
 		// get player ip
 		InetSocketAddress playerAddress = player.getAddress();
 
 		// if player address is null, do nothing and return
-		if (playerAddress == null) {
+		if (playerAddress == null)
+		{
 			return;
 		}
 
@@ -186,11 +195,13 @@ public class PlayerEventHandler implements Listener {
 		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), message, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
-		if (ipBanEntry != null) {
+		if (ipBanEntry != null)
+		{
 			ipBanEntry.save();
 
 			// write log entry if configured
-			if (plugin.getConfig().getBoolean("log-bans")) {
+			if (plugin.getConfig().getBoolean("log-bans"))
+			{
 				// get log message from language file
 				String logMessage = plugin.messageBuilder.compose(player, MessageId.LOG_PLAYER_IP_BAN)
 						.setMacro(Macro.PLAYER_IP, playerAddress.getHostString())
@@ -208,10 +219,11 @@ public class PlayerEventHandler implements Listener {
 	 *
 	 * @return Date object representing expire time, or null if configured ban time is negative
 	 */
-	private Date getExpireDate() {
-
+	private Date getExpireDate()
+	{
 		// if configured ban time is negative, return null for permanent ban
-		if (plugin.getConfig().getLong("ban-time") < 0) {
+		if (plugin.getConfig().getLong("ban-time") < 0)
+		{
 			return null;
 		}
 

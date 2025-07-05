@@ -26,8 +26,8 @@ import java.util.Collection;
 import java.util.List;
 
 
-interface Subcommand {
-
+interface Subcommand
+{
 	@SuppressWarnings("UnusedReturnValue")
 	boolean onCommand(final CommandSender sender, final List<String> argsList);
 
@@ -43,5 +43,4 @@ interface Subcommand {
 	void displayUsage(final CommandSender sender);
 
 	MessageId getDescription();
-
 }

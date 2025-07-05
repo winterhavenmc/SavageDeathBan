@@ -1,5 +1,4 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/65b98809695045ebb0596b1ebcf9f836)](https://www.codacy.com/gh/tim-savage/SavageDeathBan/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tim-savage/SavageDeathBan&amp;utm_campaign=Badge_Grade)
-[![Spigot Version](https://badgen.net/static/spigot-api/1.21.7?color=yellow)](https://spigotmc.org)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4807b26c2e91478b98af50bcf1ea5814)](https://app.codacy.com/gh/winterhavenmc/SavageDeathBan/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)[![Spigot Version](https://badgen.net/static/spigot-api/1.21.7?color=yellow)](https://spigotmc.org)
 &nbsp;[![License](https://badgen.net/static/license/GPLv3)](https://www.gnu.org/licenses/gpl-3.0)
 
 ### Description
