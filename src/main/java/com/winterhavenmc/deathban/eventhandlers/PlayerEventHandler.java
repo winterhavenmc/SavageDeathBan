@@ -44,7 +44,6 @@ import static com.winterhavenmc.library.TimeUnit.SECONDS;
  */
 public class PlayerEventHandler implements Listener
 {
-
 	// reference to plugin main class
 	private final PluginMain plugin;
 
@@ -62,7 +61,6 @@ public class PlayerEventHandler implements Listener
 	 */
 	public PlayerEventHandler(final PluginMain plugin)
 	{
-
 		// set reference to plugin main class
 		this.plugin = plugin;
 
@@ -79,7 +77,6 @@ public class PlayerEventHandler implements Listener
 	@EventHandler
 	public void onPlayerDeath(final PlayerDeathEvent event)
 	{
-
 		// get event player
 		Player player = event.getEntity();
 
