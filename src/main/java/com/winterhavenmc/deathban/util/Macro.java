@@ -21,4 +21,5 @@ public enum Macro
 {
 	DURATION,
 	PLAYER_IP,
+	SETTING,
 }
