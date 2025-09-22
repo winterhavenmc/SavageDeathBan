@@ -17,7 +17,7 @@
 
 package com.winterhavenmc.deathban.commands;
 
-import com.winterhavenmc.deathban.messages.MessageId;
+import com.winterhavenmc.deathban.util.MessageId;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 

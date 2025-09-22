@@ -18,8 +18,8 @@
 package com.winterhavenmc.deathban.eventhandlers;
 
 import com.winterhavenmc.deathban.PluginMain;
-import com.winterhavenmc.deathban.messages.Macro;
-import com.winterhavenmc.deathban.messages.MessageId;
+import com.winterhavenmc.deathban.util.Macro;
+import com.winterhavenmc.deathban.util.MessageId;
 import com.winterhavenmc.deathban.tasks.KickPlayerTask;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;

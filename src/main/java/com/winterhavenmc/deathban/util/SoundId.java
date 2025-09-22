@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Tim Savage.
+ * Copyright (c) 2022-2025 Tim Savage.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,25 +15,11 @@
  *
  */
 
-package com.winterhavenmc.deathban.messages;
+package com.winterhavenmc.deathban.util;
 
-public enum MessageId
+public enum SoundId
 {
-	COMMAND_FAIL_PERMISSION_HELP,
-	COMMAND_FAIL_PERMISSION_RELOAD,
-	COMMAND_FAIL_PERMISSION_STATUS,
-	COMMAND_FAIL_INVALID,
-
-	COMMAND_HELP_HELP,
-	COMMAND_HELP_RELOAD,
-	COMMAND_HELP_STATUS,
-	COMMAND_HELP_USAGE_HEADER,
-
+	COMMAND_INVALID,
+	COMMAND_FAIL_PERMISSION,
 	COMMAND_SUCCESS_RELOAD,
-
-	ACTION_PLAYER_KICK,
-	ACTION_PLAYER_BAN,
-
-	LOG_PLAYER_BAN,
-	LOG_PLAYER_IP_BAN,
 }

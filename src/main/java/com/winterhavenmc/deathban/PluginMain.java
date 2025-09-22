@@ -19,8 +19,8 @@ package com.winterhavenmc.deathban;
 
 import com.winterhavenmc.deathban.commands.CommandManager;
 import com.winterhavenmc.deathban.eventhandlers.PlayerEventHandler;
-import com.winterhavenmc.deathban.messages.Macro;
-import com.winterhavenmc.deathban.messages.MessageId;
+import com.winterhavenmc.deathban.util.Macro;
+import com.winterhavenmc.deathban.util.MessageId;
 import com.winterhavenmc.deathban.util.MetricsHandler;
 
 import com.winterhavenmc.library.messagebuilder.MessageBuilder;

@@ -18,8 +18,8 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
-import com.winterhavenmc.deathban.messages.MessageId;
-import com.winterhavenmc.deathban.sounds.SoundId;
+import com.winterhavenmc.deathban.util.MessageId;
+import com.winterhavenmc.deathban.util.SoundId;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;

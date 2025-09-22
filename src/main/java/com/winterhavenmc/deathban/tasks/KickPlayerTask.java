@@ -18,8 +18,8 @@
 package com.winterhavenmc.deathban.tasks;
 
 import com.winterhavenmc.deathban.PluginMain;
-import com.winterhavenmc.deathban.messages.Macro;
-import com.winterhavenmc.deathban.messages.MessageId;
+import com.winterhavenmc.deathban.util.Macro;
+import com.winterhavenmc.deathban.util.MessageId;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
