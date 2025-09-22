@@ -2,16 +2,8 @@
 
 # Time strings
 TIME_STRINGS:
-  DAY: 'day'
-  DAY_PLURAL: 'days'
-  HOUR: 'hour'
-  HOUR_PLURAL: 'hours'
-  MINUTE: 'minute'
-  MINUTE_PLURAL: 'minutes'
-  SECOND: 'second'
-  SECOND_PLURAL: 'seconds'
-  UNLIMITED: 'unlimited time'
-  LESS_THAN_ONE: 'less than one'
+  UNLIMITED: "unlimited time"
+  LESS_THAN: "less than {DURATION}"
 
 
 # Variable substitutions:
@@ -21,67 +13,87 @@ TIME_STRINGS:
 
 MESSAGES:
   COMMAND_FAIL_ARGS_COUNT_OVER:
-    message: '&cToo many arguments!'
-    enabled: true
+    MESSAGE_TEXT: "<red>Too many arguments!</red>"
 
   COMMAND_FAIL_ARGS_COUNT_UNDER:
-    message: '&cToo few arguments!'
-    enabled: true
+    MESSAGE_TEXT: "<red>Too few arguments!</red>"
 
   COMMAND_FAIL_PERMISSION_HELP:
-    message: "&cYou do not have permission to view help!"
-    enabled: true
+    MESSAGE_TEXT: "<red>You do not have permission to view help!</red>"
 
   COMMAND_FAIL_PERMISSION_RELOAD:
-    message: "&cYou do not have permission to reload the configuration!"
-    enabled: true
+    MESSAGE_TEXT: "<red>You do not have permission to reload the configuration!</red>"
 
   COMMAND_FAIL_PERMISSION_STATUS:
-    message: '&cYou do not have permission to view plugin settings!'
-    enabled: true
+    MESSAGE_TEXT: "<red>You do not have permission to view plugin settings!</red>"
 
   COMMAND_FAIL_INVALID:
-    message: '&cThat is not a valid command!'
-    enabled: true
+    MESSAGE_TEXT: "<red>That is not a valid command!</red>"
 
 
   COMMAND_SUCCESS_RELOAD:
-    message: '&bconfiguration reloaded.'
-    enabled: true
+    MESSAGE_TEXT: "<light_gray>Configuration reloaded.</light_gray>"
 
 
   COMMAND_HELP_HELP:
-    message: '&eDisplays help for graveyard commands.'
-    enabled: true
+    MESSAGE_TEXT: "<yellow>Displays help for graveyard commands.</yellow>"
 
   COMMAND_HELP_RELOAD:
-    message: '&eReloads the configuration without needing to restart the server.'
-    enabled: true
+    MESSAGE_TEXT: "<yellow>Reloads the configuration without needing to restart the server.</yellow>"
 
   COMMAND_HELP_STATUS:
-    message: '&eDisplays plugin configuration settings.'
-    enabled: true
+    MESSAGE_TEXT: "<yellow>Displays plugin configuration settings.</yellow>"
 
   COMMAND_HELP_USAGE_HEADER:
-    message: "&eCommand usage:"
-    enabled: true
-
+    MESSAGE_TEXT: "<yellow>Command usage:</yellow>"
 
   # Message to display on kick
   ACTION_PLAYER_KICK:
-    message: "You've been temp banned!"
-    enabled: true
+    MESSAGE_TEXT: "You've been temp banned!"
 
   # Message to display on join, before ban has expired
   ACTION_PLAYER_BAN:
-    message: "You're temp banned!"
-    enabled: true
-
+    MESSAGE_TEXT: "You're temp banned!"
 
   LOG_PLAYER_BAN:
-    message: "%PLAYER% was banned on death for %DURATION%."
-    enabled: true
+    MESSAGE_TEXT: "{PLAYER} was banned on death for {DURATION}."
 
   LOG_PLAYER_IP_BAN:
-    message: "IP address %PLAYER_IP% for player %PLAYER% was banned on death for %DURATION%."
-    enabled: true
+    MESSAGE_TEXT: "IP address {PLAYER_IP} for player {PLAYER} was banned on death for {DURATION}."
+
+
+  COMMAND_STATUS_HEADER:
+    MESSAGE_TEXT: "<newline><gradient:blue:aqua><strikethrough>                    =</strikethrough>[</gradient> <dark_aqua>{PLUGIN}</dark_aqua> <gradient:aqua:blue>]<strikethrough>=                    </strikethrough></gradient>"
+
+  COMMAND_STATUS_PLUGIN_VERSION:
+    MESSAGE_TEXT: "<green>Version:</green> {PLUGIN.VERSION}"
+
+  COMMAND_STATUS_LANGUAGE_SETTING:
+    MESSAGE_TEXT: "<green>Language:</green> {SETTING}"
+
+  COMMAND_STATUS_LOCALE_SETTING:
+    MESSAGE_TEXT: "<green>Locale:</green> {SETTING}"
+
+  COMMAND_STATUS_TIMEZONE_SETTING:
+    MESSAGE_TEXT: "<green>Timezone:</green> {SETTING}"
+
+  COMMAND_STATUS_BAN_TIME_SETTING:
+    MESSAGE_TEXT: "<green>Ban time:</green> {SETTING}"
+
+  COMMAND_STATUS_KICK_DELAY_SETTING:
+    MESSAGE_TEXT: "<green>Kick delay:</green> {SETTING}"
+
+  COMMAND_STATUS_BAN_IP_SETTING:
+    MESSAGE_TEXT: "<green>Ban IP:</green> {SETTING}"
+
+  COMMAND_STATUS_SOUND_EFFECTS_SETTING:
+    MESSAGE_TEXT: "<green>Sound effects:</green> {SETTING}"
+
+  COMMAND_STATUS_LOG_BANS_SETTING:
+    MESSAGE_TEXT: "<green>Log bans: </green> {SETTING}"
+
+  COMMAND_STATUS_ENABLED_WORLDS_SETTING:
+    MESSAGE_TEXT: "<green>Enabled Words:</green> {SETTING}"
+
+  COMMAND_STATUS_FOOTER:
+    MESSAGE_TEXT: "<newline><click:open_url:{URL}><blue><underlined>{URL}<underlined></blue></click>"
