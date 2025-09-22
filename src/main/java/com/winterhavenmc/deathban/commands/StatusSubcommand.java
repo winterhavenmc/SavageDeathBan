@@ -18,16 +18,16 @@
 package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
-import com.winterhavenmc.deathban.messages.MessageId;
-import com.winterhavenmc.deathban.sounds.SoundId;
+import com.winterhavenmc.deathban.util.Macro;
+import com.winterhavenmc.deathban.util.MessageId;
+import com.winterhavenmc.deathban.util.SoundId;
+import com.winterhavenmc.library.messagebuilder.resources.configuration.LocaleProvider;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
-
-import static com.winterhavenmc.library.TimeUnit.MINUTES;
-import static com.winterhavenmc.library.TimeUnit.SECONDS;
 
 
 /**
@@ -37,6 +37,7 @@ import static com.winterhavenmc.library.TimeUnit.SECONDS;
 final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 {
 	private final PluginMain plugin;
+	private final LocaleProvider localeProvider;
 
 
 	/**
@@ -47,6 +48,7 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 	StatusSubcommand(final PluginMain plugin)
 	{
 		this.plugin = Objects.requireNonNull(plugin);
+		this.localeProvider = LocaleProvider.create(plugin);
 		this.name = "status";
 		this.usageString = "/deathban status";
 		this.description = MessageId.COMMAND_HELP_STATUS;
@@ -65,41 +67,118 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 			return true;
 		}
 
-		// output config settings
-		String versionString = plugin.getDescription().getVersion();
+		displayStatusHeader(sender);
+		displayPluginVersion(sender);
+		displayDebugSetting(sender);
+		displayLanguageSetting(sender);
+		displayLocaleSetting(sender);
+		displayTimezoneSetting(sender);
+		displayBanTimeSetting(sender);
+		displayKickDelaySetting(sender);
+		displayBanIpSetting(sender);
+		displayLogBansSetting(sender);
+		displaySoundEffectsSetting(sender);
+		displayEnabledWorldsSetting(sender);
+		displayStatusFooter(sender);
+		return true;
+	}
 
-		sender.sendMessage(ChatColor.DARK_AQUA
-				+ "[" + plugin.getName() + "] " + ChatColor.AQUA + "Version: " + ChatColor.RESET + versionString);
+	private void displayStatusHeader(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_HEADER)
+//				.setMacro(Macro.PLUGIN, plugin)
+				.send();
+	}
 
-		if (plugin.getConfig().getBoolean("debug"))
-		{
+
+	private void displayPluginVersion(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_PLUGIN_VERSION).send();
+	}
+
+	private void displayDebugSetting(final CommandSender sender)
+	{
+		if (plugin.getConfig().getBoolean("debug")) {
 			sender.sendMessage(ChatColor.DARK_RED + "DEBUG: true");
 		}
+	}
 
-		long banTime = plugin.getConfig().getLong("ban-time");
 
-		sender.sendMessage(ChatColor.GREEN + "Ban time: "
-				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(MINUTES.toMillis(banTime)));
+	private void displayLanguageSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_LANGUAGE_SETTING)
+				.setMacro(Macro.SETTING, plugin.getConfig().getString("language"))
+				.send();
+	}
 
-		long kickDelay = plugin.getConfig().getLong("kick-delay");
 
-		sender.sendMessage(ChatColor.GREEN + "Kick delay: "
-				+ ChatColor.RESET + plugin.messageBuilder.getTimeString(SECONDS.toMillis(kickDelay)));
+	private void displayLocaleSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_LOCALE_SETTING)
+				.setMacro(Macro.SETTING, localeProvider.getLanguageTag())
+				.send();
+	}
 
-		sender.sendMessage(ChatColor.GREEN + "Ban IP: "
-				+ ChatColor.RESET + plugin.getConfig().getString("ban-ip"));
 
-		sender.sendMessage(ChatColor.GREEN + "Sound effects: "
-				+ ChatColor.RESET + plugin.getConfig().getString("sound-effects"));
+	private void displayTimezoneSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_TIMEZONE_SETTING)
+				.setMacro(Macro.SETTING, localeProvider.getZoneId().getId())
+				.send();
+	}
 
-		sender.sendMessage(ChatColor.GREEN + "Log bans: "
-				+ ChatColor.RESET + plugin.getConfig().getString("log-bans"));
+	private void displayBanTimeSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_BAN_TIME_SETTING)
+				.setMacro(Macro.SETTING, Duration.ofMinutes(plugin.getConfig().getLong("ban-time")))
+				.send();
+	}
 
-		sender.sendMessage(ChatColor.GREEN + "Enabled Worlds: "
-				+ ChatColor.RESET + plugin.worldManager.getEnabledWorldNames().toString());
+	private void displayKickDelaySetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_KICK_DELAY_SETTING)
+				.setMacro(Macro.SETTING, Duration.ofSeconds(plugin.getConfig().getLong("kick-delay")))
+				.send();
+	}
 
-		// always return true to suppress bukkit usage message
-		return true;
+
+	private void displayBanIpSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_BAN_IP_SETTING)
+				.setMacro(Macro.SETTING, plugin.getConfig().getBoolean("ban-ip"))
+				.send();
+	}
+
+
+	private void displayLogBansSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_LOG_BANS_SETTING)
+				.setMacro(Macro.SETTING, plugin.getConfig().getBoolean("log-bans"))
+				.send();
+	}
+
+
+	private void displaySoundEffectsSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_SOUND_EFFECTS_SETTING)
+				.setMacro(Macro.SETTING, plugin.getConfig().getBoolean("sound-effects"))
+				.send();
+	}
+
+
+	private void displayEnabledWorldsSetting(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_ENABLED_WORLDS_SETTING)
+				.setMacro(Macro.SETTING, plugin.worldManager.getEnabledWorldNames().toString())
+				.send();
+	}
+
+
+	private void displayStatusFooter(final CommandSender sender)
+	{
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_FOOTER)
+//				.setMacro(Macro.PLUGIN, plugin)
+				.send();
 	}
 
 }

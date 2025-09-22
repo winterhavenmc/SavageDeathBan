@@ -18,8 +18,8 @@
 package com.winterhavenmc.deathban.eventhandlers;
 
 import com.winterhavenmc.deathban.PluginMain;
-import com.winterhavenmc.deathban.messages.Macro;
-import com.winterhavenmc.deathban.messages.MessageId;
+import com.winterhavenmc.deathban.util.Macro;
+import com.winterhavenmc.deathban.util.MessageId;
 import com.winterhavenmc.deathban.tasks.KickPlayerTask;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -35,8 +35,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.winterhavenmc.library.TimeUnit.MINUTES;
-import static com.winterhavenmc.library.TimeUnit.SECONDS;
+import static com.winterhavenmc.library.time.TimeUnit.MINUTES;
+import static com.winterhavenmc.library.time.TimeUnit.SECONDS;
 
 
 /**
@@ -44,7 +44,6 @@ import static com.winterhavenmc.library.TimeUnit.SECONDS;
  */
 public class PlayerEventHandler implements Listener
 {
-
 	// reference to plugin main class
 	private final PluginMain plugin;
 
@@ -62,7 +61,6 @@ public class PlayerEventHandler implements Listener
 	 */
 	public PlayerEventHandler(final PluginMain plugin)
 	{
-
 		// set reference to plugin main class
 		this.plugin = plugin;
 
@@ -79,7 +77,6 @@ public class PlayerEventHandler implements Listener
 	@EventHandler
 	public void onPlayerDeath(final PlayerDeathEvent event)
 	{
-
 		// get event player
 		Player player = event.getEntity();
 

@@ -19,8 +19,6 @@ package com.winterhavenmc.deathban;
 
 import com.winterhavenmc.deathban.commands.CommandManager;
 import com.winterhavenmc.deathban.eventhandlers.PlayerEventHandler;
-import com.winterhavenmc.deathban.messages.Macro;
-import com.winterhavenmc.deathban.messages.MessageId;
 import com.winterhavenmc.deathban.util.MetricsHandler;
 
 import com.winterhavenmc.library.messagebuilder.MessageBuilder;
@@ -34,7 +32,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PluginMain extends JavaPlugin
 {
 	// message builder
-	public MessageBuilder<MessageId, Macro> messageBuilder;
+	public MessageBuilder messageBuilder;
 
 	// sound configuration
 	public SoundConfiguration soundConfig;
@@ -50,7 +48,7 @@ public class PluginMain extends JavaPlugin
 		saveDefaultConfig();
 
 		// instantiate message builder
-		messageBuilder = new MessageBuilder<>(this);
+		messageBuilder = MessageBuilder.create(this);
 
 		// instantiate sound configuration
 		soundConfig = new YamlSoundConfiguration(this);
