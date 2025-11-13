@@ -176,9 +176,7 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 
 	private void displayStatusFooter(final CommandSender sender)
 	{
-		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_FOOTER)
-//				.setMacro(Macro.PLUGIN, plugin)
-				.send();
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_FOOTER).send();
 	}
 
 }
