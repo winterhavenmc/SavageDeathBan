@@ -169,7 +169,7 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 	private void displayEnabledWorldsSetting(final CommandSender sender)
 	{
 		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_ENABLED_WORLDS_SETTING)
-				.setMacro(Macro.SETTING, plugin.worldManager.getEnabledWorldNames().toString())
+				.setMacro(Macro.SETTING, plugin.messageBuilder.worlds().enabledNames().toString())
 				.send();
 	}
 
