@@ -35,9 +35,9 @@
 
 	<distributionManagement>
 		<repository>
-			<id>github</id>
-			<name>GitHub winterhavenmc Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/winterhavenmc/MessageBuilderLib/</url>
+			<id>repsy</id>
+			<name>Repsy.io winterhavenmc Maven Packages</name>
+			<url>https://repo.repsy.io/mvn/winterhavenmc/public/</url>
 		</repository>
 	</distributionManagement>
 
@@ -45,6 +45,13 @@
 		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>repsy-repo</id>
+			<url>https://repo.repsy.io/mvn/winterhavenmc/public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
