@@ -35,8 +35,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.winterhavenmc.library.time.TimeUnit.MINUTES;
-import static com.winterhavenmc.library.time.TimeUnit.SECONDS;
+import static com.winterhavenmc.library.messagebuilder.models.time.TimeUnit.MINUTES;
+import static com.winterhavenmc.library.messagebuilder.models.time.TimeUnit.SECONDS;
 
 
 /**
