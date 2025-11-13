@@ -19,7 +19,7 @@ package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.util.MessageId;
-import com.winterhavenmc.deathban.util.SoundId;
+
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
