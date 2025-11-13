@@ -87,7 +87,7 @@ public class PlayerEventHandler implements Listener
 		}
 
 		// if world is not enabled, do nothing and return
-		if (!plugin.worldManager.isEnabled(player.getWorld()))
+		if (!plugin.messageBuilder.worlds().isEnabled(player.getWorld().getUID()))
 		{
 			return;
 		}
