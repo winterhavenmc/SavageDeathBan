@@ -19,7 +19,7 @@ package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.util.MessageId;
-import com.winterhavenmc.deathban.util.SoundId;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -82,7 +82,6 @@ final class HelpSubcommand extends AbstractSubcommand implements Subcommand
 		if (!sender.hasPermission(permissionNode))
 		{
 			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_HELP).send();
-			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
 			return true;
 		}
 
@@ -123,8 +122,7 @@ final class HelpSubcommand extends AbstractSubcommand implements Subcommand
 	 */
 	private void sendCommandInvalidMessage(CommandSender sender)
 	{
-		plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_INVALID).send();
-		plugin.soundConfig.playSound(sender, SoundId.COMMAND_INVALID);
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_INVALID).send();
 		displayUsageAll(sender);
 	}
 
