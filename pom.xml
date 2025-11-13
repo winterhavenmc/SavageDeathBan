@@ -35,9 +35,9 @@
 
 	<distributionManagement>
 		<repository>
-			<id>github</id>
-			<name>GitHub winterhavenmc Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/winterhavenmc/MessageBuilderLib/</url>
+			<id>repsy</id>
+			<name>Repsy.io winterhavenmc Maven Packages</name>
+			<url>https://repo.repsy.io/mvn/winterhavenmc/public/</url>
 		</repository>
 	</distributionManagement>
 
@@ -45,6 +45,13 @@
 		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>repsy-repo</id>
+			<url>https://repo.repsy.io/mvn/winterhavenmc/public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -66,23 +73,9 @@
 
 		<!-- MessageBuilderLib -->
 		<dependency>
-			<groupId>com.winterhaven-mc</groupId>
-			<artifactId>message-builder-lib</artifactId>
+			<groupId>com.winterhavenmc.messagebuilder</groupId>
+			<artifactId>bootstrap</artifactId>
 			<version>2.0.0-SNAPSHOT</version>
-		</dependency>
-
-		<!-- SoundConfigLib -->
-		<dependency>
-			<groupId>com.winterhaven-mc</groupId>
-			<artifactId>sound-config-lib</artifactId>
-			<version>1.21.0-SNAPSHOT</version>
-		</dependency>
-
-		<!-- WorldManagerLib -->
-		<dependency>
-			<groupId>com.winterhaven-mc</groupId>
-			<artifactId>world-manager-lib</artifactId>
-			<version>1.21.0-SNAPSHOT</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
@@ -138,7 +131,7 @@
 				<version>3.13.0</version>
 			</plugin>
 
-			<!-- Create Shaded jar -->
+			<!-- create shaded jar -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -149,49 +142,36 @@
 						<goals>
 							<goal>shade</goal>
 						</goals>
-						<configuration>
-							<minimizeJar>true</minimizeJar>
-							<filters>
-								<filter>
-									<artifact>org.bstats:bstats-*</artifact>
-									<excludes>
-										<exclude>META-INF/MANIFEST.MF</exclude>
-										<exclude>META-INF/*.SF</exclude>
-										<exclude>META-INF/*.DSA</exclude>
-										<exclude>META-INF/*.RSA</exclude>
-									</excludes>
-								</filter>
-								<filter>
-									<artifact>com.winterhaven-mc:*-lib</artifact>
-									<excludes>
-										<exclude>META-INF/MANIFEST.MF</exclude>
-										<exclude>META-INF/*.SF</exclude>
-										<exclude>META-INF/*.DSA</exclude>
-										<exclude>META-INF/*.RSA</exclude>
-									</excludes>
-								</filter>
-							</filters>
-							<artifactSet>
-								<includes>
-									<include>com.winterhaven-mc:message-builder-lib</include>
-									<include>com.winterhaven-mc:sound-config-lib</include>
-									<include>com.winterhaven-mc:world-manager-lib</include>
-									<include>org.bstats</include>
-								</includes>
-							</artifactSet>
-							<relocations>
-								<relocation>
-									<pattern>com.winterhavenmc.library</pattern>
-									<shadedPattern>com.winterhavenmc.savagedeathban.shaded</shadedPattern>
-								</relocation>
-								<relocation>
-									<pattern>org.bstats</pattern>
-									<shadedPattern>com.winterhavenmc.savagedeathban.shaded</shadedPattern>
-								</relocation>
-							</relocations>
-						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<minimizeJar>true</minimizeJar>
+					<filters>
+						<filter>
+							<!-- Apply only to dependencies (not the plugin module itself) -->
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+								<!-- optionally exclude MANIFEST.MF from dependencies if not needed -->
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+					</filters>
+
+					<!-- relocate these packages on the class path to avoid conflicts with other plugins -->
+					<relocations>
+						<relocation>
+							<pattern>com.winterhavenmc.library</pattern>
+							<shadedPattern>com.winterhavenmc.deathban.shaded</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>org.bstats</pattern>
+							<shadedPattern>com.winterhavenmc.deathban.shaded</shadedPattern>
+						</relocation>
+					</relocations>
+				</configuration>
 			</plugin>
 
 			<!-- Plugin for Unit Tests -->

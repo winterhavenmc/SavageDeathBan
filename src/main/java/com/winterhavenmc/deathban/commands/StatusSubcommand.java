@@ -20,8 +20,7 @@ package com.winterhavenmc.deathban.commands;
 import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.util.Macro;
 import com.winterhavenmc.deathban.util.MessageId;
-import com.winterhavenmc.deathban.util.SoundId;
-import com.winterhavenmc.library.messagebuilder.resources.configuration.LocaleProvider;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -37,7 +36,6 @@ import java.util.Objects;
 final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 {
 	private final PluginMain plugin;
-	private final LocaleProvider localeProvider;
 
 
 	/**
@@ -48,7 +46,6 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 	StatusSubcommand(final PluginMain plugin)
 	{
 		this.plugin = Objects.requireNonNull(plugin);
-		this.localeProvider = LocaleProvider.create(plugin);
 		this.name = "status";
 		this.usageString = "/deathban status";
 		this.description = MessageId.COMMAND_HELP_STATUS;
@@ -62,9 +59,7 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 		// if command sender does not have permission to view status, output error message and return true
 		if (!sender.hasPermission(permissionNode))
 		{
-			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_STATUS).send();
-			plugin.soundConfig.playSound(sender, SoundId.COMMAND_FAIL_PERMISSION);
-			return true;
+			return plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_PERMISSION_STATUS).send();
 		}
 
 		displayStatusHeader(sender);
@@ -115,7 +110,7 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 	private void displayLocaleSetting(final CommandSender sender)
 	{
 		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_LOCALE_SETTING)
-				.setMacro(Macro.SETTING, localeProvider.getLanguageTag())
+				.setMacro(Macro.SETTING, plugin.messageBuilder.config().languageTag())
 				.send();
 	}
 
@@ -123,7 +118,7 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 	private void displayTimezoneSetting(final CommandSender sender)
 	{
 		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_TIMEZONE_SETTING)
-				.setMacro(Macro.SETTING, localeProvider.getZoneId().getId())
+				.setMacro(Macro.SETTING, plugin.messageBuilder.config().zoneId().getId())
 				.send();
 	}
 
@@ -169,16 +164,14 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 	private void displayEnabledWorldsSetting(final CommandSender sender)
 	{
 		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_ENABLED_WORLDS_SETTING)
-				.setMacro(Macro.SETTING, plugin.worldManager.getEnabledWorldNames().toString())
+				.setMacro(Macro.SETTING, plugin.messageBuilder.worlds().enabledNames().toString())
 				.send();
 	}
 
 
 	private void displayStatusFooter(final CommandSender sender)
 	{
-		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_FOOTER)
-//				.setMacro(Macro.PLUGIN, plugin)
-				.send();
+		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_FOOTER).send();
 	}
 
 }

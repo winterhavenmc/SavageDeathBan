@@ -35,8 +35,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.winterhavenmc.library.time.TimeUnit.MINUTES;
-import static com.winterhavenmc.library.time.TimeUnit.SECONDS;
+import static com.winterhavenmc.library.messagebuilder.models.time.TimeUnit.MINUTES;
+import static com.winterhavenmc.library.messagebuilder.models.time.TimeUnit.SECONDS;
 
 
 /**
@@ -87,7 +87,7 @@ public class PlayerEventHandler implements Listener
 		}
 
 		// if world is not enabled, do nothing and return
-		if (!plugin.worldManager.isEnabled(player.getWorld()))
+		if (!plugin.messageBuilder.worlds().isEnabled(player.getWorld().getUID()))
 		{
 			return;
 		}
