@@ -27,7 +27,7 @@ MESSAGES:
   COMMAND_FAIL_PERMISSION_STATUS:
     MESSAGE_TEXT: "<red>You do not have permission to view plugin settings!</red>"
 
-  COMMAND_FAIL_INVALID:
+  COMMAND_INVALID:
     MESSAGE_TEXT: "<red>That is not a valid command!</red>"
 
 

@@ -19,7 +19,7 @@ package com.winterhavenmc.deathban.commands;
 
 import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.util.MessageId;
-import com.winterhavenmc.deathban.util.SoundId;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -124,8 +124,7 @@ public final class CommandManager implements TabExecutor
 		if (optionalSubcommand.isEmpty())
 		{
 			optionalSubcommand = subcommandRegistry.getSubcommand("help");
-			plugin.messageBuilder.compose(sender, MessageId.COMMAND_FAIL_INVALID).send();
-			plugin.soundConfig.playSound(sender, SoundId.COMMAND_INVALID);
+			plugin.messageBuilder.compose(sender, MessageId.COMMAND_INVALID).send();
 		}
 
 		// execute subcommand
