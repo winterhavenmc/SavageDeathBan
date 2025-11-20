@@ -81,7 +81,6 @@ final class StatusSubcommand extends AbstractSubcommand implements Subcommand
 	private void displayStatusHeader(final CommandSender sender)
 	{
 		plugin.messageBuilder.compose(sender, MessageId.COMMAND_STATUS_HEADER)
-//				.setMacro(Macro.PLUGIN, plugin)
 				.send();
 	}
 
