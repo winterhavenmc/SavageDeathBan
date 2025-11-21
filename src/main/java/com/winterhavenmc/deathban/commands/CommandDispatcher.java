@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 /**
  * Implements command executor for SavageDeathBan commands.
  */
-public final class CommandManager implements TabExecutor
+public final class CommandDispatcher implements TabExecutor
 {
 	// reference to plugin main class
 	private final PluginMain plugin;
@@ -42,11 +42,11 @@ public final class CommandManager implements TabExecutor
 
 
 	/**
-	 * constructor method for {@code CommandManager} class
+	 * constructor method for {@code CommandDispatcher} class
 	 *
 	 * @param plugin reference to main class
 	 */
-	public CommandManager(final PluginMain plugin)
+	public CommandDispatcher(final PluginMain plugin)
 	{
 		// set reference to main class
 		this.plugin = plugin;

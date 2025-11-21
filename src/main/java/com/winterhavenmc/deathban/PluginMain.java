@@ -17,7 +17,7 @@
 
 package com.winterhavenmc.deathban;
 
-import com.winterhavenmc.deathban.commands.CommandManager;
+import com.winterhavenmc.deathban.commands.CommandDispatcher;
 import com.winterhavenmc.deathban.eventhandlers.PlayerEventHandler;
 import com.winterhavenmc.deathban.util.MetricsHandler;
 
@@ -42,7 +42,7 @@ public class PluginMain extends JavaPlugin
 		messageBuilder = MessageBuilder.create(this);
 
 		// instantiate command manager
-		new CommandManager(this);
+		new CommandDispatcher(this);
 
 		// instantiate player event handler
 		new PlayerEventHandler(this);
