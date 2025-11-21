@@ -1,10 +1,10 @@
 # Configuration file for ${project.name} v${project.version}
 
-# localized language file
+# localized language file for in-game messages
 language: en-US
 
-# Locale (for time and number formatting)
-locale: en-US
+# Locale (for time/date and number formatting)
+#locale: en-US
 
 # Time zone (for displaying localized time/date)
 # List of valid values: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
@@ -14,13 +14,13 @@ locale: en-US
 # enabled worlds list
 # if this list is empty, all worlds will be added to the enabled worlds list
 # otherwise, only listed worlds will be added to the enabled worlds list
-enabled-worlds: []
+#enabled-worlds:
 #  - enabled_world1
 #  - enabled_world2
 
 # disabled worlds list
 # these worlds will be removed from the enabled worlds list created by the previous setting
-disabled-worlds: []
+#disabled-worlds:
 #  - disabled_world1
 #  - disabled_world2
 
