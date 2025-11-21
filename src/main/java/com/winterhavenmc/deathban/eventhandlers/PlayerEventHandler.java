@@ -21,6 +21,7 @@ import com.winterhavenmc.deathban.PluginMain;
 import com.winterhavenmc.deathban.util.Macro;
 import com.winterhavenmc.deathban.util.MessageId;
 import com.winterhavenmc.deathban.tasks.KickPlayerTask;
+
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.entity.Player;
@@ -29,6 +30,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.Date;
 import java.util.Set;
@@ -136,13 +138,13 @@ public class PlayerEventHandler implements Listener
 	private void banPlayer(final Player player)
 	{
 		// get ban list
-		BanList banList = plugin.getServer().getBanList(BanList.Type.NAME);
+		BanList<Player> banList = plugin.getServer().getBanList(BanList.Type.PROFILE);
 
 		// get ban message from language file
 		String banMessage = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN).toString();
 
 		// add player to ban list
-		BanEntry banEntry = banList.addBan(player.getName(), banMessage, getExpireDate(), BAN_SOURCE);
+		BanEntry<Player> banEntry = banList.addBan(player, banMessage, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (banEntry != null)
@@ -181,7 +183,7 @@ public class PlayerEventHandler implements Listener
 		}
 
 		// get ip ban list
-		BanList ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
+		BanList<InetAddress> ipBanList = plugin.getServer().getBanList(BanList.Type.IP);
 
 		// get ban message from language file
 		String message = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN)
@@ -189,7 +191,7 @@ public class PlayerEventHandler implements Listener
 				.toString();
 
 		// add player ip to ban list
-		BanEntry ipBanEntry = ipBanList.addBan(playerAddress.getHostString(), message, getExpireDate(), BAN_SOURCE);
+		BanEntry<InetAddress> ipBanEntry = ipBanList.addBan(playerAddress.getAddress(), message, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (ipBanEntry != null)
