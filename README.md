@@ -27,7 +27,7 @@ This plugin temp bans a player on death for a configurable period of time.
 |-----------------|------------------------------------------------------------|---------|
 | deathban.admin  | Administrator permission, grants all following permissions | op      |
 | deathban.reload | Allows use of plugin reload command                        | op      |
-| deathban.status | Allows a user plugin configuration settings                | op      |
+| deathban.status | Allows a user to view plugin configuration settings        | op      |
 | deathban.exempt | Makes a user exempt from death bans                        | op      |
 
 ### Configuration
