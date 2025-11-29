@@ -29,6 +29,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.profile.PlayerProfile;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -138,13 +139,13 @@ public class PlayerEventHandler implements Listener
 	private void banPlayer(final Player player)
 	{
 		// get ban list
-		BanList<Player> banList = plugin.getServer().getBanList(BanList.Type.PROFILE);
+		BanList<PlayerProfile> banList = plugin.getServer().getBanList(BanList.Type.PROFILE);
 
 		// get ban message from language file
 		String banMessage = plugin.messageBuilder.compose(player, MessageId.ACTION_PLAYER_BAN).toString();
 
 		// add player to ban list
-		BanEntry<Player> banEntry = banList.addBan(player, banMessage, getExpireDate(), BAN_SOURCE);
+		BanEntry<PlayerProfile> banEntry = banList.addBan(player.getPlayerProfile(), banMessage, getExpireDate(), BAN_SOURCE);
 
 		// save ban entry
 		if (banEntry != null)
